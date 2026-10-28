@@ -1,0 +1,4708 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema MAIS 2026 | Monitoreo y Certificación ISO 9001 - DSSAS</title>
+  <meta name="description" content="Plataforma profesional para la gestión, seguimiento y monitoreo de los 38 indicadores de certificación MAIS 2026 bajo estándares de calidad ISO 9001. CESFAM Cholchol, Red DSSAS.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+/* PALETA INSTITUCIONAL PROFESIONAL MAIS 2026 - DSSAS / CESFAM CHOLCHOL */
+:root {
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-header: #0a192f;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-light: #64748b;
+  
+  /* 1. AZUL (Institucional / Red de Salud / Confianza) */
+  --blue-dark: #0a192f;
+  --blue-navy: #1e3a8a;
+  --blue-primary: #1d4ed8;
+  --blue-royal: #2563eb;
+  --primary: #1d4ed8;
+  --primary-hover: #1e40af;
+  --primary-light: #eff6ff;
+  
+  /* 2. CELESTE (Médico / Tecnológico / Acentos) */
+  --celeste: #0284c7;
+  --celeste-hover: #0369a1;
+  --celeste-accent: #38bdf8;
+  --celeste-light: #e0f2fe;
+  
+  /* 3. VERDE CLARO (Aprobado / Conforme / Cumplimiento Positivo) */
+  --green-light: #22c55e;
+  --green-bright: #4ade80;
+  --green-soft: #dcfce7;
+  --green-border: #86efac;
+  --success: #22c55e;
+  --success-light: #dcfce7;
+  --success-text: #15803d;
+  
+  /* 4. VERDE OSCURO (Salud Familiar / Solidez / Acreditación) */
+  --green-deep: #15803d;
+  --green-dark: #166534;
+  
+  /* 5. AMARILLO (En Progreso / Atención / Semáforo Alerta) */
+  --yellow-main: #eab308;
+  --yellow-accent: #facc15;
+  --yellow-light: #fef9c3;
+  --yellow-border: #fde047;
+  --yellow-text: #854d0e;
+  --warning: #eab308;
+  --warning-light: #fef9c3;
+  --warning-text: #854d0e;
+  
+  /* 6. ROJO (Criterio Excluyente / Insuficiente) */
+  --danger: #ef4444;
+  --danger-light: #fee2e2;
+  --danger-text: #991b1b;
+  
+  --border: #cbd5e1;
+  --border-light: #e2e8f0;
+  
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.5;
+  font-size: 14px;
+  min-height: 100vh;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* TOP HEADER */
+.app-header {
+  background: linear-gradient(135deg, #0a192f 0%, #1e3a8a 55%, #0284c7 100%);
+  color: #ffffff;
+  padding: 1.1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3.5px solid #38bdf8;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.25);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(14, 165, 233, 0.15);
+  border: 1px solid rgba(14, 165, 233, 0.4);
+  color: #38bdf8;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #38bdf8;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #38bdf8;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(56, 189, 248, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+}
+
+.header-title-block h1 {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.header-title-block .subtitle {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+.header-title-block strong {
+  color: #38bdf8;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* BUTTONS */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.82rem;
+  padding: 0.55rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(2, 132, 199, 0.3);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+  box-shadow: 0 4px 8px rgba(2, 132, 199, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #e2e8f0;
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* NAVIGATION TABS */
+.nav-tabs {
+  background-color: #0b1a30;
+  display: flex;
+  padding: 0 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  overflow-x: auto;
+  gap: 0.5rem;
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.85rem 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.tab-icon {
+  width: 17px;
+  height: 17px;
+  opacity: 0.7;
+}
+
+.tab-btn:hover {
+  color: #f1f5f9;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.tab-btn.active {
+  color: #38bdf8;
+  border-bottom-color: #38bdf8;
+  background: rgba(56, 189, 248, 0.06);
+}
+
+.tab-btn.active .tab-icon {
+  opacity: 1;
+}
+
+/* MAIN CONTENT */
+.main-content {
+  flex: 1;
+  padding: 1.75rem 2rem;
+  max-width: 1550px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active {
+  display: block;
+  animation: fadeIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* CERTIFICATION BANNER */
+.cert-banner {
+  border-radius: var(--radius-lg);
+  padding: 1.35rem 1.75rem;
+  margin-bottom: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.cert-banner.certified {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border-color: #a7f3d0;
+  color: #065f46;
+}
+
+.cert-banner.in-progress {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border-color: #fde68a;
+  color: #92400e;
+}
+
+.cert-banner.not-certified {
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border-color: #fecaca;
+  color: #991b1b;
+}
+
+.cert-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.cert-icon-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+}
+
+.cert-banner-text h2 {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin-bottom: 2px;
+}
+
+.cert-banner-text p {
+  font-size: 0.88rem;
+  opacity: 0.9;
+}
+
+.cert-banner-badges {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.cert-status-chip {
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+/* STATS GRID */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.4rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.stat-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+
+.stat-badge.info { background: var(--primary-light); color: var(--primary); }
+.stat-badge.warning { background: var(--warning-light); color: var(--warning-text); }
+.stat-badge.success { background: var(--success-light); color: var(--success-text); }
+.stat-badge.danger { background: var(--danger-light); color: var(--danger-text); }
+
+.stat-value {
+  font-family: var(--font-heading);
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.stat-progress-bar {
+  height: 7px;
+  background-color: var(--border-light);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-bottom: 0.65rem;
+}
+
+.stat-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0284c7 0%, #38bdf8 100%);
+  border-radius: 9999px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-progress-fill.success {
+  background: linear-gradient(90deg, #059669 0%, #10b981 100%);
+}
+
+.stat-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.meta-target {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.risk-counters {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.r-dot {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+.r-dot.critico { background: var(--danger-light); color: var(--danger-text); }
+.r-dot.alto { background: #ffedd5; color: #9a3412; }
+.r-dot.medio { background: var(--warning-light); color: var(--warning-text); }
+.r-dot.bajo { background: var(--success-light); color: var(--success-text); }
+
+.phva-flow-mini {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.phva-flow-mini span {
+  background: var(--primary-light);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.75rem;
+}
+
+/* CONTENT BOXES & TABLES */
+.content-box {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.content-box.mt-4 {
+  margin-top: 1.5rem;
+}
+
+.box-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fafbfc;
+}
+
+.box-header h3 {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.box-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.badge-pill {
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+}
+
+.badge-pill.danger {
+  background: var(--danger-light);
+  color: var(--danger-text);
+}
+
+.dash-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 900px) {
+  .dash-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* LISTS IN DASHBOARD */
+.principios-list, .componentes-list {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.prin-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.prin-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.prin-name {
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.prin-count {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.prin-score {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.prin-bar-bg {
+  height: 8px;
+  background: var(--border-light);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.prin-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0284c7 0%, #0ea5e9 100%);
+  border-radius: 9999px;
+  transition: width 0.6s ease;
+}
+
+/* DATA TABLE */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.83rem;
+}
+
+.data-table th {
+  background: #f8fafc;
+  padding: 0.85rem 1rem;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+
+.data-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+  color: var(--text-main);
+}
+
+.data-table tr:hover td {
+  background-color: #f8fafc;
+}
+
+/* STATUS CHIPS */
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.status-tag.verde { background: var(--success-light); color: var(--success-text); }
+.status-tag.amarillo { background: var(--warning-light); color: var(--warning-text); }
+.status-tag.rojo { background: var(--danger-light); color: var(--danger-text); }
+
+.tag-ob {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.tag-ob.si {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+}
+
+.tag-ob.no {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+/* ACTION BUTTONS IN TABLE */
+.action-btn-group {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.btn-icon {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.55rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: all 0.15s ease;
+  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 600;
+}
+
+.btn-icon:hover {
+  background: var(--primary-light);
+  color: var(--primary);
+  border-color: #bae6fd;
+}
+
+/* FILTER TOOLBAR */
+.filter-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.search-input-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 280px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 17px;
+  height: 17px;
+  color: var(--text-light);
+}
+
+.search-input-wrapper input {
+  width: 100%;
+  padding: 0.65rem 1rem 0.65rem 2.4rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-input-wrapper input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+}
+
+.filter-group {
+  display: flex;
+  gap: 0.65rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filter-select {
+  padding: 0.6rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--text-main);
+  outline: none;
+  cursor: pointer;
+}
+
+.filter-select:focus {
+  border-color: var(--primary);
+}
+
+/* SECTION HEADERS */
+.section-header-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.section-header-block h2 {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.section-sub {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* PHVA STEPS GRID */
+.phva-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.phva-step-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  border-top: 4px solid var(--primary);
+}
+
+.phva-step-card.plan { border-top-color: #0284c7; }
+.phva-step-card.do { border-top-color: #10b981; }
+.phva-step-card.check { border-top-color: #f59e0b; }
+.phva-step-card.act { border-top-color: #8b5cf6; }
+
+.phva-header {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.5rem;
+}
+
+.phva-letter {
+  width: 32px;
+  height: 32px;
+  background: var(--border-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+.phva-step-card h4 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.phva-step-card p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* RISK LEGEND */
+.risk-matrix-container {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.risk-legend-card h4 {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 0.85rem;
+}
+
+.risk-legend-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.85rem;
+}
+
+.r-leg {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.82rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+}
+
+.r-leg.critico { background: var(--danger-light); color: var(--danger-text); }
+.r-leg.alto { background: #ffedd5; color: #9a3412; }
+.r-leg.medio { background: var(--warning-light); color: var(--warning-text); }
+.r-leg.bajo { background: var(--success-light); color: var(--success-text); }
+
+.r-badge {
+  font-weight: 800;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* GUIA CARDS */
+.guia-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.guia-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.guia-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.guia-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+}
+
+.guia-card p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+}
+
+.guia-list {
+  list-style: none;
+  font-size: 0.82rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.guia-list li {
+  padding-left: 1rem;
+  position: relative;
+  color: #334155;
+}
+
+.guia-list li::before {
+  content: "•";
+  color: var(--primary);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+/* FOOTER */
+.app-footer {
+  background: #ffffff;
+  border-top: 1px solid var(--border);
+  padding: 1.25rem 2rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.footer-meta {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+/* MODAL STYLES */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-card {
+  background: #ffffff;
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 780px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+  transform: translateY(12px) scale(0.98);
+  transition: all 0.25s ease;
+}
+
+.modal-overlay.active .modal-card {
+  transform: translateY(0) scale(1);
+}
+
+.modal-header {
+  padding: 1.25rem 1.75rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+}
+
+.modal-header h3 {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  color: var(--text-light);
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 0.25rem;
+  transition: color 0.15s ease;
+}
+
+.modal-close:hover {
+  color: var(--text-main);
+}
+
+.modal-body {
+  padding: 1.75rem;
+  overflow-y: auto;
+}
+
+.modal-footer {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+/* FORM STYLES */
+.form-section-title {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 0.85rem;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.35rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 650px) {
+  .form-row {
+    flex-direction: column;
+  }
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.form-group.flex-2 { flex: 2; }
+
+.form-group label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+  padding: 0.6rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  outline: none;
+  transition: all 0.15s ease;
+}
+
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+}
+
+.input-readonly {
+  background-color: #f8fafc;
+  color: var(--text-muted);
+  cursor: default;
+}
+
+.info-callout {
+  background: var(--primary-light);
+  border-left: 4px solid var(--primary);
+  padding: 0.75rem 1rem;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-size: 0.83rem;
+  color: #0369a1;
+  line-height: 1.45;
+}
+
+/* ESCALA DE PUNTOS SEGÚN NIVEL DE AVANCE */
+.escala-puntos-card {
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.escala-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.82rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--radius-sm);
+}
+
+.escala-row.p10 {
+  background: #ecfdf5;
+  border-left: 4px solid var(--success);
+  color: #065f46;
+}
+
+.escala-row.p05 {
+  background: #fffbeb;
+  border-left: 4px solid var(--warning);
+  color: #92400e;
+}
+
+.escala-row.p00 {
+  background: #fef2f2;
+  border-left: 4px solid var(--danger);
+  color: #991b1b;
+}
+
+.escala-badge {
+  font-weight: 800;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.08);
+  white-space: nowrap;
+}
+
+/* GUIA OPERATIVA CARD */
+.guia-operativa-card {
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.guia-sub-block strong {
+  font-size: 0.8rem;
+  color: #0369a1;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 1rem; }
+
+/* ENLACES A GOOGLE DRIVE */
+.btn-drive {
+  background: #f1f5f9;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #0284c7;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-drive:hover {
+  background: #e0f2fe;
+  border-color: #7dd3fc;
+  color: #0369a1;
+  transform: translateY(-1px);
+}
+
+.btn-drive.empty {
+  color: #94a3b8;
+  border-style: dashed;
+}
+
+.drive-input-wrapper {
+  position: relative;
+}
+
+/* ENCARGADOS GRID & CARDS */
+.encargados-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 1.25rem;
+}
+
+.encargado-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  padding: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.encargado-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.encargado-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.encargado-title h3 {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.encargado-role {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.encargado-meta {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.enc-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.enc-badge.ob {
+  background: var(--danger-light);
+  color: var(--danger-text);
+}
+
+.encargado-progress-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.enc-prog-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.enc-ind-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.35rem;
+  border-top: 1px solid var(--border);
+  padding-top: 0.65rem;
+}
+
+.enc-ind-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background: #f8fafc;
+}
+
+.enc-ind-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.enc-ind-left strong {
+  font-size: 0.75rem;
+  color: var(--primary);
+}
+
+/* TOASTS */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  z-index: 2000;
+}
+
+.toast {
+  background: #0f172a;
+  color: #ffffff;
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xl);
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  animation: slideIn 0.3s ease;
+  min-width: 280px;
+}
+
+.toast.success { border-left: 4px solid var(--success); }
+.toast.error { border-left: 4px solid var(--danger); }
+.toast.info { border-left: 4px solid var(--primary); }
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* ==========================================================================
+   AUTHENTICATION & USER PROFILE STYLES
+   ========================================================================== */
+.user-profile-widget {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: 0.5rem;
+  padding-left: 0.75rem;
+  border-left: 1px solid var(--border-color);
+}
+
+.user-badge-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.user-badge-chip:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md);
+}
+
+.user-avatar-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), #1d4ed8);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.3);
+}
+
+.user-info-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  text-align: left;
+}
+
+.user-name-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-main);
+  max-width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-role-tag {
+  font-size: 0.68rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.user-role-tag.super-admin {
+  color: #7c3aed;
+}
+
+.btn-auth-action {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.35rem;
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.btn-auth-action:hover {
+  color: var(--danger);
+  background: #fef2f2;
+}
+
+/* LOGIN MODAL & CARDS */
+.login-brand-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.login-brand-icon {
+  width: 54px;
+  height: 54px;
+  background: linear-gradient(135deg, var(--primary), #1e40af);
+  color: white;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.75rem auto;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+}
+
+.quick-roles-container {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--border-color);
+}
+
+.quick-roles-title {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.quick-roles-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.role-chip {
+  font-size: 0.72rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-hover);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.role-chip:hover {
+  background: var(--primary-light);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.role-chip.admin {
+  background: #f5f3ff;
+  color: #7c3aed;
+  border-color: #ddd6fe;
+  font-weight: 600;
+}
+
+/* PASSWORD INPUT WRAPPER */
+.password-field-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-field-wrapper input {
+  padding-right: 2.5rem;
+}
+
+.btn-toggle-password {
+  position: absolute;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+}
+
+/* USERS ADMIN TABLE */
+.badge-role-admin {
+  background: #f5f3ff;
+  color: #7c3aed;
+  border: 1px solid #ddd6fe;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.72rem;
+}
+
+.badge-role-encargado {
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.72rem;
+}
+
+.badge-status-temp {
+  background: #fffbeb;
+  color: #b45309;
+  border: 1px solid #fde68a;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-full);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+
+/* FORCED DISPLAY FOR ACTIVE MODALS */
+.modal-overlay.active, #modal-login.active, #modal-change-password.active, #modal-create-user.active {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 99999 !important;
+  pointer-events: auto !important;
+}
+
+
+.tab-btn.active {
+  color: var(--blue-primary) !important;
+  border-bottom: 3px solid var(--blue-primary) !important;
+  background: linear-gradient(180deg, transparent 80%, rgba(2, 132, 199, 0.08) 100%);
+}
+
+.tab-btn:hover:not(.active) {
+  color: var(--celeste) !important;
+  background: #f1f5f9;
+}
+
+/* Stat Cards Enhancements with Requested Colors */
+.stat-card:nth-child(1) {
+  border-top: 4px solid var(--blue-royal);
+}
+.stat-card:nth-child(2) {
+  border-top: 4px solid var(--green-light);
+}
+.stat-card:nth-child(3) {
+  border-top: 4px solid var(--yellow-main);
+}
+.stat-card:nth-child(4) {
+  border-top: 4px solid var(--celeste);
+}
+
+/* Status Pill Semáforos */
+.status-tag.verde, .status-pill.status-verde {
+  background: #dcfce7 !important;
+  color: #15803d !important;
+  border: 1px solid #86efac !important;
+  font-weight: 700 !important;
+}
+
+.status-tag.amarillo, .status-pill.status-amarillo {
+  background: #fef9c3 !important;
+  color: #854d0e !important;
+  border: 1px solid #fde047 !important;
+  font-weight: 700 !important;
+}
+
+.status-tag.rojo, .status-pill.status-rojo {
+  background: #fee2e2 !important;
+  color: #991b1b !important;
+  border: 1px solid #fca5a5 !important;
+  font-weight: 700 !important;
+}
+
+/* ESTILOS DE IMPRESIÓN Y EXPORTACIÓN A PDF */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 11pt !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  .app-header {
+    background: #1e3a8a !important;
+    color: #ffffff !important;
+    padding: 1rem !important;
+    position: static !important;
+    border-bottom: 3px solid #0284c7 !important;
+  }
+  
+  .header-actions, .nav-tabs, .section-actions, .modal-overlay, #toast-container, .btn-icon, .btn-drive {
+    display: none !important;
+  }
+  
+  .app-main {
+    padding: 1rem 0 !important;
+  }
+  
+  .tab-pane {
+    display: block !important;
+    margin-bottom: 2rem !important;
+    page-break-after: always;
+  }
+  
+  .stat-card {
+    box-shadow: none !important;
+    border: 1px solid #cbd5e1 !important;
+    break-inside: avoid;
+  }
+  
+  .data-table {
+    border: 1px solid #cbd5e1 !important;
+    font-size: 9pt !important;
+  }
+  
+  .data-table th {
+    background: #1e3a8a !important;
+    color: #ffffff !important;
+  }
+  
+  .data-table td {
+    padding: 6px 8px !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+  
+  .print-footer {
+    display: block !important;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #cbd5e1;
+    page-break-inside: avoid;
+  }
+}
+
+.print-footer {
+  display: none;
+}
+
+</style>
+  <script>
+    window.openModal = function(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.add('active');
+        modal.style.display = 'flex';
+        modal.style.visibility = 'visible';
+        modal.style.opacity = '1';
+        modal.style.zIndex = '99999';
+      }
+    };
+    window.closeModal = function(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.remove('active');
+        modal.style.display = 'none';
+        modal.style.visibility = 'hidden';
+        modal.style.opacity = '0';
+      }
+    };
+  </script>
+</head>
+<body>
+
+<div id="portable-cloud-bar" style="background: linear-gradient(135deg, #1e293b, #0f172a); color: white; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; font-size: 13px; border-bottom: 2px solid #3b82f6; z-index: 9999;">
+  <div style="display: flex; align-items: center; gap: 10px;">
+    <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e;"></span>
+    <strong>Modo Portable Multiequipo:</strong> Conectado en la nube con Google Sheets (CESFAM Cholchol)
+  </div>
+  <div style="display: flex; align-items: center; gap: 8px;">
+    <label for="cloud-api-url" style="color: #94a3b8; font-size: 12px;">Enlace Web App Google:</label>
+    <input type="text" id="cloud-api-url" placeholder="https://script.google.com/macros/s/.../exec" style="padding: 4px 8px; border-radius: 4px; border: 1px solid #475569; background: #0f172a; color: white; width: 320px; font-size: 11px;">
+    <button onclick="saveCloudUrl()" style="background: #2563eb; color: white; border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: 600;">Guardar Enlace</button>
+  </div>
+</div>
+
+  <div class="app-container">
+    <!-- TOP HEADER -->
+    <header class="app-header">
+      <div class="header-left">
+        <div class="brand-badge">
+          <span class="pulse-dot"></span>
+          <span>DSSAS · MAIS 2026</span>
+        </div>
+        <div class="header-title-block">
+          <h1>Sistema de Certificación y Monitoreo MAIS</h1>
+          <p class="subtitle"><strong>CESFAM Cholchol</strong> · Departamento de Salud Municipal Cholchol · Dirección de Servicio de Salud Araucanía Sur (DSSAS)</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <!-- BOTONES GOOGLE SHEETS: EXCLUSIVOS PARA ROL PROGRAMADOR & SUPER ADMIN -->
+        <button id="btn-sync-sheets" class="btn btn-primary" style="display: none; background: linear-gradient(135deg, #1e3a8a, #0284c7); border: none;" title="Sincronizar base de datos con Google Sheets en tiempo real">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+          <span id="sync-btn-text">Sincronizar Planilla</span>
+        </button>
+        <a id="btn-open-sheets" href="https://docs.google.com/spreadsheets/d/1TgrhDnEVbamYLIxOj0Gu6QVIzyk7bVtF-1Dae5gjB1c/edit?gid=0#gid=0" target="_blank" class="btn btn-outline" style="display: none; border-color: #38bdf8; color: #0284c7;" title="Abrir Planilla Oficial en Google Sheets (Exclusivo Super Admin)">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <span>Abrir Planilla Google</span>
+        </a>
+
+        <!-- BOTONES DISPONIBLES PARA TODOS LOS PERFILES: CSV Y REPORTE PDF -->
+        <button id="btn-export-csv" class="btn btn-outline" style="border-color: #22c55e; color: #15803d; background: #ffffff;" title="Descargar base consolidada en archivo CSV">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          <span>Descargar CSV</span>
+        </button>
+        <button id="btn-export-pdf" onclick="window.printReport()" class="btn btn-outline" style="border-color: #0284c7; color: #0369a1; background: #ffffff;" title="Generar e Imprimir Informe Oficial de Certificación en PDF">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          <span>Informe PDF</span>
+        </button>
+
+        <div id="user-profile-widget"  class="user-profile-widget">
+          <!-- Vista para usuarios no autenticados -->
+          <div id="auth-guest-view" style="display: flex; align-items: center;">
+            <button id="btn-open-login" type="button" onclick="openModal('modal-login')" class="btn btn-primary" style="background: linear-gradient(135deg, #1e40af, #2563eb); border: none; font-weight: 600; box-shadow: 0 2px 6px rgba(37,99,235,0.3); cursor: pointer; position: relative; z-index: 100;">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>
+              <span>🔐 Acceso Funcionarios</span>
+            </button>
+          </div>
+          <!-- Vista para usuarios autenticados -->
+          <div id="auth-logged-view" style="display: none; align-items: center; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px; background: #f8fafc; border: 1px solid #cbd5e1; padding: 4px 12px; border-radius: 9999px;">
+              <span id="user-avatar-chip" style="width: 26px; height: 26px; border-radius: 50%; background: #2563eb; color: white; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold;">👑</span>
+              <div style="text-align: left; line-height: 1.15;">
+                <div id="user-display-name" style="font-size: 12px; font-weight: 600; color: #0f172a;">Jefatura Técnica DSM</div>
+                <div id="user-display-role" style="font-size: 10px; color: #0284c7; font-weight: 600;">Programador & Super Admin</div>
+              </div>
+            </div>
+            <button id="btn-user-change-pw" class="btn btn-outline" style="padding: 4px 8px; font-size: 11px;" title="Cambiar mi contraseña">🔑 Clave</button>
+            <button id="btn-logout" class="btn btn-outline" style="padding: 4px 8px; font-size: 11px; color: #dc2626; border-color: #fca5a5;" title="Cerrar sesión">Salir</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN NAVIGATION TABS -->
+    <nav class="nav-tabs" role="tablist">
+      <button class="tab-btn active" data-tab="tab-dashboard" role="tab" id="tab-nav-dashboard">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span>Panel de Certificación</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-indicadores" role="tab" id="tab-nav-indicadores">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <span>Matriz de Indicadores (38)</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-encargados" role="tab" id="tab-nav-encargados">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span>Encargados por Eje (Ruta MAIS)</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-cortes" role="tab" id="tab-nav-cortes">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Cortes y Monitoreo</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-riesgos" role="tab" id="tab-nav-riesgos">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <span>Gestión de Riesgos (ISO 6.1)</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-mejora" role="tab" id="tab-nav-mejora">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <span>Ciclo PHVA & Mejora Continua</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-auditorias" role="tab" id="tab-nav-auditorias">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <span>Auditorías Clínicas (ISO 9.2)</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-guia" role="tab" id="tab-nav-guia">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        <span>Normativa DSSAS 2026</span>
+      </button>
+          <button class="tab-btn" data-tab="tab-usuarios" role="tab" id="tab-nav-usuarios" style="display: none;">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span>Gestión de Usuarios (Admin)</span>
+      </button>
+    </nav>
+
+    <!-- CONTENT AREAS -->
+    <main class="main-content">
+      <!-- 1. DASHBOARD TAB -->
+      <section id="tab-dashboard" class="tab-pane active">
+        <!-- CERTIFICATION SUMMARY BANNER -->
+        <div id="certification-banner" class="cert-banner">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- STATS CARDS GRID -->
+        <div class="stats-grid">
+          <div class="stat-card" id="card-global-pts">
+            <div class="stat-header">
+              <span class="stat-label">Puntaje Global MAIS</span>
+              <span class="stat-badge info" id="kpi-total-ind">38 Indicadores</span>
+            </div>
+            <div class="stat-value" id="kpi-pts-val">-- / 38</div>
+            <div class="stat-progress-bar">
+              <div class="stat-progress-fill" id="kpi-pts-bar" style="width: 0%"></div>
+            </div>
+            <div class="stat-footer">
+              <span id="kpi-pts-pct">0% Cumplimiento</span>
+              <span class="meta-target">Meta: ≥ 65% (24.7 pts)</span>
+            </div>
+          </div>
+
+          <div class="stat-card" id="card-obligatorios">
+            <div class="stat-header">
+              <span class="stat-label">10 Indicadores Obligatorios</span>
+              <span class="stat-badge warning">Criterio Excluyente</span>
+            </div>
+            <div class="stat-value" id="kpi-ob-val">-- / 10</div>
+            <div class="stat-progress-bar">
+              <div class="stat-progress-fill success" id="kpi-ob-bar" style="width: 0%"></div>
+            </div>
+            <div class="stat-footer">
+              <span id="kpi-ob-pct">0% Aprobados</span>
+              <span class="meta-target">Exigido: 100% (10/10)</span>
+            </div>
+          </div>
+
+          <div class="stat-card" id="card-riesgos">
+            <div class="stat-header">
+              <span class="stat-label">Gestión de Riesgos ISO 9001</span>
+              <span class="stat-badge" id="kpi-riesgos-badge">Matriz Activa</span>
+            </div>
+            <div class="stat-value" id="kpi-riesgos-val">--</div>
+            <div class="risk-counters" id="kpi-riesgos-breakdown">
+              <!-- Risk dots -->
+            </div>
+            <div class="stat-footer">
+              <span>Pensamiento basado en riesgos</span>
+              <span class="meta-target">ISO 9001: 6.1</span>
+            </div>
+          </div>
+
+          <div class="stat-card" id="card-mejora">
+            <div class="stat-header">
+              <span class="stat-label">Planes de Mejora PHVA</span>
+              <span class="stat-badge success">Mejora Continua</span>
+            </div>
+            <div class="stat-value" id="kpi-mejora-val">--</div>
+            <div class="phva-flow-mini">
+              <span title="Planificar">P</span> · <span title="Hacer">H</span> · <span title="Verificar">V</span> · <span title="Actuar">A</span>
+            </div>
+            <div class="stat-footer">
+              <span>Cierre de no conformidades</span>
+              <span class="meta-target">ISO 9001: 10.2</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BREAKDOWN GRIDS: PRINCIPIOS & COMPONENTES -->
+        <div class="dash-columns">
+          <!-- Principios MAIS -->
+          <div class="content-box">
+            <div class="box-header">
+              <div>
+                <h3>Avance por Principios Irrenunciables</h3>
+                <p class="box-sub">Evaluación del despliegue tridimensional del modelo</p>
+              </div>
+              <span class="badge-pill">3 Principios</span>
+            </div>
+            <div class="principios-list" id="principios-container">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Componentes MAIS -->
+          <div class="content-box">
+            <div class="box-header">
+              <div>
+                <h3>Avance por Componentes del Modelo</h3>
+                <p class="box-sub">Distribución de cobertura de la población objetivo</p>
+              </div>
+              <span class="badge-pill">3 Componentes</span>
+            </div>
+            <div class="componentes-list" id="componentes-container">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+        <!-- OBLIGATORIOS HIGHLIGHT LIST -->
+        <div class="content-box mt-4">
+          <div class="box-header">
+            <div>
+              <h3>Estatus Crítico de los 10 Indicadores Obligatorios</h3>
+              <p class="box-sub">El incumplimiento de cualquiera de estos indicadores anula de inmediato la opción de certificación MAIS 2026.</p>
+            </div>
+            <span class="badge-pill danger">Requisito Excluyente</span>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table" id="table-obligatorios-dash">
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Principio</th>
+                  <th>Nombre Operativo</th>
+                  <th>Meta</th>
+                  <th>Avance</th>
+                  <th>Puntos</th>
+                  <th>Estado</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-obligatorios-dash">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. INDICADORES TAB (CRUD) -->
+      <section id="tab-indicadores" class="tab-pane">
+        <!-- FILTER BAR -->
+        <div class="filter-toolbar">
+          <div class="search-input-wrapper">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="filter-search" placeholder="Buscar por código, nombre, proceso ISO o palabras clave..." autocomplete="off">
+          </div>
+          <div class="filter-group">
+            <select id="filter-principio" class="filter-select">
+              <option value="">Todos los Principios</option>
+              <option value="Centrado en la Persona">Centrado en la Persona (16)</option>
+              <option value="Integralidad">Integralidad (10)</option>
+              <option value="Continuidad del Cuidado">Continuidad del Cuidado (12)</option>
+            </select>
+            <select id="filter-componente" class="filter-select">
+              <option value="">Todos los Componentes</option>
+              <option value="Comunidad">Comunidad (8)</option>
+              <option value="Personas y Familias">Personas y Familias (16)</option>
+              <option value="Equipos de Salud">Equipos de Salud (14)</option>
+            </select>
+            <select id="filter-obligatorio" class="filter-select">
+              <option value="">Todos (38)</option>
+              <option value="1">Solo Obligatorios (10)</option>
+              <option value="0">No Obligatorios (28)</option>
+            </select>
+            <select id="filter-semaforo" class="filter-select">
+              <option value="">Todos los Estados</option>
+              <option value="Verde">Verde (Conforme ≥75%)</option>
+              <option value="Amarillo">Amarillo (En Progreso 50-74%)</option>
+              <option value="Rojo">Rojo (Crítico &lt;50%)</option>
+            </select>
+            <select id="filter-responsable" class="filter-select">
+              <option value="">Todos los Encargados</option>
+              <option value="Enc. Calidad">Enc. Calidad</option>
+              <option value="Enc. SOME">Enc. SOME / Estadística</option>
+              <option value="Enc. ECICEP">Enc. ECICEP</option>
+              <option value="Enc. Participación">Enc. Participación / Asesora Intercultural</option>
+              <option value="Jefes de Sector">Jefes de Sector</option>
+              <option value="Enc. MAIS - Dirección">Enc. MAIS - Dirección</option>
+              <option value="Duplas Psicosociales">Duplas Psicosociales</option>
+              <option value="Enc. Promoción">Enc. Promoción</option>
+              <option value="Enc. Capacitación">Enc. Capacitación</option>
+              <option value="Enc. RRHH">Enc. RRHH</option>
+              <option value="Prevencionista">Prevencionista</option>
+              <option value="Enc. Urgencia">Enc. Urgencia</option>
+            </select>
+            <button id="btn-add-indicador" class="btn btn-primary" title="Registrar nuevo indicador complementario local">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <span>Nuevo Indicador</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- TABLE OF ALL 38 INDICATORS -->
+        <div class="content-box">
+          <div class="table-responsive">
+            <table class="data-table" id="table-indicadores">
+              <thead>
+                <tr>
+                  <th style="width: 70px;">ID</th>
+                  <th style="width: 140px;">Principio</th>
+                  <th style="width: 110px;">Componente</th>
+                  <th>Nombre del Indicador & Criterio Ruta</th>
+                  <th style="width: 110px;">Tipo</th>
+                  <th style="width: 90px;">Avance</th>
+                  <th style="width: 80px;">Puntos</th>
+                  <th style="width: 100px;">Semáforo</th>
+                  <th style="width: 140px;">Responsable</th>
+                  <th style="width: 120px;">Carpeta Drive</th>
+                  <th style="width: 170px;">Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-indicadores">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2.5 ENCARGADOS POR EJE TAB -->
+      <section id="tab-encargados" class="tab-pane">
+        <div class="section-header-block">
+          <div>
+            <h2>Distribución de Responsabilidades y Encargados por Eje</h2>
+            <p class="section-sub">Propuesta oficial del Plan de Trabajo Ruta Certificación MAIS · CESFAM Cholchol. Monitoreo por referente técnico.</p>
+          </div>
+          <button id="btn-sync-encargados" class="btn btn-outline" onclick="loadEncargados()">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+            <span>Actualizar Métricas</span>
+          </button>
+        </div>
+
+        <!-- ENCARGADOS GRID CARDS -->
+        <div class="encargados-grid" id="encargados-container">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+
+      <!-- 3. CORTES Y MONITOREO TAB -->
+      <section id="tab-cortes" class="tab-pane">
+        <div class="section-header-block">
+          <div>
+            <h2>Monitoreo y Mediciones de Corte MAIS</h2>
+            <p class="section-sub">Registro periódico de cortes evaluativos (Marzo, Agosto, Diciembre) para el seguimiento del Modelo y auditoría de la DSSAS.</p>
+          </div>
+          <button id="btn-add-corte" class="btn btn-primary">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>Registrar Medición de Corte</span>
+          </button>
+        </div>
+
+        <div class="content-box">
+          <div class="table-responsive">
+            <table class="data-table" id="table-cortes">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Corte</th>
+                  <th>Fecha</th>
+                  <th>Indicador</th>
+                  <th>Numerador</th>
+                  <th>Denominador</th>
+                  <th>% Resultado</th>
+                  <th>Meta</th>
+                  <th>Semáforo</th>
+                  <th>Evaluador</th>
+                  <th>Evidencia</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-cortes">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. GESTIÓN DE RIESGOS ISO 9001 TAB -->
+      <section id="tab-riesgos" class="tab-pane">
+        <div class="section-header-block">
+          <div>
+            <h2>Matriz de Gestión de Riesgos (ISO 9001: 6.1)</h2>
+            <p class="section-sub">Enfoque preventivo y evaluación de severidad (Probabilidad × Impacto) en los procesos clave de certificación MAIS.</p>
+          </div>
+          <button id="btn-add-riesgo" class="btn btn-primary">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>Registrar Nuevo Riesgo</span>
+          </button>
+        </div>
+
+        <!-- RISK HEATMAP SUMMARY -->
+        <div class="risk-matrix-container">
+          <div class="risk-legend-card">
+            <h4>Niveles de Severidad de Riesgo</h4>
+            <div class="risk-legend-items">
+              <div class="r-leg critico"><span class="r-badge">15 - 25</span> <strong>Crítico:</strong> Acción correctiva inmediata, anula certificación</div>
+              <div class="r-leg alto"><span class="r-badge">10 - 14</span> <strong>Alto:</strong> Requiere plan de contingencia formal</div>
+              <div class="r-leg medio"><span class="r-badge">5 - 9</span> <strong>Medio:</strong> Monitoreo mensual en reunión de sector</div>
+              <div class="r-leg bajo"><span class="r-badge">1 - 4</span> <strong>Bajo:</strong> Riesgo tolerable con control operativo</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-box mt-4">
+          <div class="table-responsive">
+            <table class="data-table" id="table-riesgos">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Principio / Indicador</th>
+                  <th>Proceso ISO 9001</th>
+                  <th>Factor de Riesgo</th>
+                  <th>Prob (1-5)</th>
+                  <th>Imp (1-5)</th>
+                  <th>Severidad</th>
+                  <th>Nivel</th>
+                  <th>Plan de Mitigación</th>
+                  <th>Responsable</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-riesgos">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. CICLO PHVA Y MEJORA CONTINUA TAB -->
+      <section id="tab-mejora" class="tab-pane">
+        <div class="section-header-block">
+          <div>
+            <h2>Ciclo PHVA y Planes de Mejora Continua (ISO 9001: 10)</h2>
+            <p class="section-sub">Gestión sistemática de No Conformidades, análisis de causa raíz (Ishikawa / 5 Porqués) y verificación de eficacia.</p>
+          </div>
+          <button id="btn-add-hallazgo" class="btn btn-primary">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>Registrar Hallazgo / Plan de Mejora</span>
+          </button>
+        </div>
+
+        <!-- PHVA STAGES CARDS -->
+        <div class="phva-steps-grid">
+          <div class="phva-step-card plan">
+            <div class="phva-header"><span class="phva-letter">P</span> <h4>Planificar (Plan)</h4></div>
+            <p>Identificar desviación, causa raíz y diseñar plan de acción correctivo.</p>
+          </div>
+          <div class="phva-step-card do">
+            <div class="phva-header"><span class="phva-letter">H</span> <h4>Hacer (Do)</h4></div>
+            <p>Ejecutar actividades, capacitar equipos y aplicar nuevos protocolos.</p>
+          </div>
+          <div class="phva-step-card check">
+            <div class="phva-header"><span class="phva-letter">V</span> <h4>Verificar (Check)</h4></div>
+            <p>Auditar resultados intermedios y medir impacto sobre el indicador MAIS.</p>
+          </div>
+          <div class="phva-step-card act">
+            <div class="phva-header"><span class="phva-letter">A</span> <h4>Actuar (Act)</h4></div>
+            <p>Estandarizar la solución, documentar lecciones aprendidas y cerrar no conformidad.</p>
+          </div>
+        </div>
+
+        <div class="content-box mt-4">
+          <div class="table-responsive">
+            <table class="data-table" id="table-hallazgos">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Fecha</th>
+                  <th>Tipo</th>
+                  <th>Indicador MAIS</th>
+                  <th>Descripción Desviación</th>
+                  <th>Causa Raíz</th>
+                  <th>Acción Correctiva</th>
+                  <th>Fase PHVA</th>
+                  <th>Plazo</th>
+                  <th>Responsable</th>
+                  <th>Estado</th>
+                  <th>Eficacia</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-hallazgos">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. AUDITORÍAS CLÍNICAS TAB -->
+      <section id="tab-auditorias" class="tab-pane">
+        <div class="section-header-block">
+          <div>
+            <h2>Auditorías Clínicas y de Terreno (ISO 9001: 9.2)</h2>
+            <p class="section-sub">Evaluación estandarizada con Pautas de Cotejo DSSAS: Agrupación Familiar, Planes ECICEP, Visita Domiciliaria VDI y Egresos.</p>
+          </div>
+          <button id="btn-add-auditoria" class="btn btn-primary">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>Registrar Nueva Auditoría</span>
+          </button>
+        </div>
+
+        <div class="content-box">
+          <div class="table-responsive">
+            <table class="data-table" id="table-auditorias">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Fecha</th>
+                  <th>Indicador Auditado</th>
+                  <th>Sector CESFAM</th>
+                  <th>Ficha / RCE</th>
+                  <th>Criterios Evaluados</th>
+                  <th>Cumplidos</th>
+                  <th>% Conformidad</th>
+                  <th>Dictamen</th>
+                  <th>Auditor</th>
+                  <th>Observaciones</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-auditorias">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. GUÍA Y NORMATIVA TAB -->
+      <section id="tab-guia" class="tab-pane">
+        <div class="section-header-block">
+          <div>
+            <h2>Guía Operativa y Marco Normativo DSSAS 2026</h2>
+            <p class="section-sub">Criterios técnicos oficiales para la acreditación en la Red de Salud Araucanía Sur.</p>
+          </div>
+        </div>
+
+        <div class="guia-cards-grid">
+          <div class="guia-card">
+            <div class="guia-icon">🏛️</div>
+            <h3>Matriz MAIS Araucanía Sur</h3>
+            <p>Estructurada en una matriz de <strong>3 Ejes (Principios irrenunciables)</strong> y <strong>3 Componentes (Población objetivo)</strong>, completando 38 indicadores ponderados a 1 punto cada uno.</p>
+            <ul class="guia-list">
+              <li><strong>Centrado en la Persona:</strong> 16 indicadores (42.1%)</li>
+              <li><strong>Integralidad:</strong> 10 indicadores (26.3%)</li>
+              <li><strong>Continuidad del Cuidado:</strong> 12 indicadores (31.6%)</li>
+            </ul>
+          </div>
+
+          <div class="guia-card">
+            <div class="guia-icon">⚖️</div>
+            <h3>Requisitos de Certificación</h3>
+            <p>Para ser considerado implementador del Modelo MAIS, el CESFAM debe cumplir rigurosamente dos condiciones concurrentes:</p>
+            <ul class="guia-list">
+              <li><strong>1. Puntaje Global:</strong> Alcanzar ≥ 65% del puntaje total (mínimo 24.7 puntos sobre 38).</li>
+              <li><strong>2. 10 Indicadores Obligatorios:</strong> Cumplir el 100% de los mínimos exigidos en cada uno de los 10 obligatorios.</li>
+              <li><em>Nota:</em> La no ejecución de un solo indicador obligatorio anula inmediatamente la certificación.</li>
+            </ul>
+          </div>
+
+          <div class="guia-card">
+            <div class="guia-icon">🔄</div>
+            <h3>Articulación con ISO 9001:2015</h3>
+            <p>La integración con ISO 9001 fortalece la sostenibilidad y rigor del Modelo de Salud Familiar:</p>
+            <ul class="guia-list">
+              <li><strong>Enfoque al Usuario (Cláusula 5.1.2):</strong> Trato digno y toma de decisiones compartida.</li>
+              <li><strong>Gestión de Riesgos (Cláusula 6.1):</strong> Matriz preventiva en procesos asistenciales críticos.</li>
+              <li><strong>Mejora Continua PHVA (Cláusula 10):</strong> Cierre estructurado de brechas y planes de acción con eficacia comprobada.</li>
+              <li><strong>Trazabilidad y Evidencia (Cláusula 7.5):</strong> Medios verificadores oficiales visados.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+          <!-- 9. TAB GESTIÓN DE USUARIOS (SOLO SUPER ADMIN) -->
+      <section id="tab-usuarios" class="tab-pane">
+        <div class="section-header-row">
+          <div>
+            <h2>Administración de Usuarios y Perfiles de Encargados</h2>
+            <p class="section-subtitle">Gestión centralizada de credenciales, roles y asignación de ejes para el equipo MAIS de CESFAM Cholchol</p>
+          </div>
+          <div class="section-actions">
+            <button id="btn-create-user-modal" class="btn btn-primary">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <span>Crear Nuevo Perfil</span>
+            </button>
+            <button id="btn-export-users-csv" class="btn btn-outline" title="Exportar nómina de usuarios y claves temporales a CSV">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              <span>Exportar Nómina Claves</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- STATS DE USUARIOS -->
+        <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 1.5rem;">
+          <div class="stat-card">
+            <div class="stat-label">Total Usuarios</div>
+            <div class="stat-value" id="kpi-users-total" style="font-size: 1.8rem;">14</div>
+            <div class="stat-footer">Perfiles activos en sistema</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Super Administradores</div>
+            <div class="stat-value" style="font-size: 1.8rem; color: #7c3aed;">1</div>
+            <div class="stat-footer">jefatura.tecnicadsm@gmail.com</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Encargados de Eje</div>
+            <div class="stat-value" id="kpi-users-encargados" style="font-size: 1.8rem; color: var(--primary);">13</div>
+            <div class="stat-footer">Duplas y referentes técnicos</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Claves Pendientes de Actualizar</div>
+            <div class="stat-value" id="kpi-users-temp" style="font-size: 1.8rem; color: #b45309;">13</div>
+            <div class="stat-footer">Con clave temporal inicial</div>
+          </div>
+        </div>
+
+        <!-- TABLA DE USUARIOS -->
+        <div class="table-container shadow-sm">
+          <table class="data-table" id="table-users">
+            <thead>
+              <tr>
+                <th style="width: 50px;">ID</th>
+                <th>Nombre Funcionario / Referente</th>
+                <th>Correo Electrónico</th>
+                <th>Cargo / Estamento</th>
+                <th>Rol</th>
+                <th>Eje Responsable</th>
+                <th>Clave Temporal Asignada</th>
+                <th>Estado Clave</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-users">
+              <!-- Renderizado dinámico vía JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    
+      <!-- PIE DE FIRMAS OFICIALES PARA IMPRESIÓN Y REPORTE PDF -->
+      <div class="print-footer">
+        <h4 style="text-align: center; margin-bottom: 2rem; color: #1e3a8a;">ACTA INSTITUCIONAL DE AUDITORÍA Y CERTIFICACIÓN MAIS 2026</h4>
+        <div style="display: flex; justify-content: space-between; margin-top: 3rem; text-align: center; gap: 2rem;">
+          <div style="flex: 1; border-top: 1px solid #475569; padding-top: 0.5rem;">
+            <strong>Dirección CESFAM Cholchol</strong><br>
+            <span style="font-size: 0.8rem; color: #64748b;">Representante Legal Establecimiento</span>
+          </div>
+          <div style="flex: 1; border-top: 1px solid #475569; padding-top: 0.5rem;">
+            <strong>Referente Técnico MAIS / Calidad</strong><br>
+            <span style="font-size: 0.8rem; color: #64748b;">Comité Calidad Asistencial ISO 9001</span>
+          </div>
+          <div style="flex: 1; border-top: 1px solid #475569; padding-top: 0.5rem;">
+            <strong>Servicio de Salud Araucanía Sur</strong><br>
+            <span style="font-size: 0.8rem; color: #64748b;">Equipo Auditor / Certificador DSSAS</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="app-footer">
+      <p>Sistema Integral de Seguimiento y Monitoreo MAIS 2026 · Departamento de Salud Municipal Cholchol · Dirección de Servicio de Salud Araucanía Sur (DSSAS)</p>
+      <div class="footer-meta">
+        <span>Sincronizado con Google Sheets API</span> · 
+        <span>SQLite Database Local</span> · 
+        <span>ISO 9001:2015 Compliant</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- MODAL: EDITAR / DETALLE INDICADOR -->
+  <div id="modal-indicador" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <span class="badge-pill" id="m-ind-code">P1-1.1</span>
+          <h3 id="m-ind-title">Editar Indicador MAIS</h3>
+        </div>
+        <button class="modal-close" id="btn-close-modal-ind">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-indicador">
+          <input type="hidden" id="m-ind-id">
+          
+          <div class="form-section-title">Información Técnica del Indicador</div>
+          <div class="form-row">
+            <div class="form-group flex-2">
+              <label>Nombre Oficial DSSAS</label>
+              <input type="text" id="m-ind-oficial" readonly class="input-readonly">
+            </div>
+            <div class="form-group">
+              <label>Tipo de Indicador</label>
+              <input type="text" id="m-ind-ob" readonly class="input-readonly">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Principio MAIS</label>
+              <input type="text" id="m-ind-principio" readonly class="input-readonly">
+            </div>
+            <div class="form-group">
+              <label>Componente</label>
+              <input type="text" id="m-ind-componente" readonly class="input-readonly">
+            </div>
+            <div class="form-group">
+              <label>Proceso ISO 9001</label>
+              <input type="text" id="m-ind-proceso" readonly class="input-readonly">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Mínimos de Aprobación Exigidos (Guía DSSAS 2026)</label>
+            <div id="m-ind-minimos" class="info-callout"></div>
+          </div>
+
+          <!-- ESCALA EXPLICATIVA DE PUNTAJES -->
+          <div class="form-section-title">Escala de Puntuación según Nivel de Avance (Sin Ambigüedades)</div>
+          <div class="escala-puntos-card" id="m-ind-escala-box">
+            <!-- Dynamically populated with 1.0 pt, 0.5 pt, 0.0 pt -->
+          </div>
+
+          <!-- GUIA OPERATIVA Y PREGUNTAS DE AUDITORIA -->
+          <div class="form-section-title mt-3">Guía Operativa y Verificación en Terreno (DSSAS)</div>
+          <div class="guia-operativa-card">
+            <div class="guia-sub-block">
+              <strong>Procedimiento Operativo para el Equipo:</strong>
+              <p id="m-ind-guia-paso" style="font-size: 0.85rem; color: #334155; margin-top: 3px;"></p>
+            </div>
+            <div class="guia-sub-block mt-2">
+              <strong>Preguntas Clave que Evaluará el Servicio de Salud:</strong>
+              <p id="m-ind-preguntas-auditoria" style="font-size: 0.85rem; color: #0284c7; margin-top: 3px; font-weight: 500;"></p>
+            </div>
+            <div class="guia-sub-block mt-2">
+              <strong>Verificador / Producto Específico (Ruta MAIS):</strong>
+              <p id="m-ind-verificador-ruta" style="font-size: 0.85rem; color: #059669; margin-top: 3px; font-weight: 600;"></p>
+            </div>
+          </div>
+
+          <div class="form-section-title mt-3" style="display: flex; justify-content: space-between; align-items: center;">
+            <span>Valores de Cumplimiento y Medición Actual</span>
+            <span style="font-size: 0.72rem; color: #0284c7; font-weight: 600; text-transform: none;">⚡ Semáforo y Puntaje se calculan automáticamente según el % de avance</span>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="m-ind-avance">Porcentaje de Avance Actual (%)</label>
+              <input type="number" id="m-ind-avance" min="0" max="100" step="0.1" placeholder="ej. 85.0" required>
+              <span style="font-size: 0.72rem; color: #64748b; margin-top: 2px;">Escriba el % para autocalcular</span>
+            </div>
+            <div class="form-group">
+              <label for="m-ind-meta">Meta Programada (%)</label>
+              <input type="number" id="m-ind-meta" min="0" max="100" step="0.1" value="100">
+              <span style="font-size: 0.72rem; color: #64748b; margin-top: 2px;">Estándar normado: 100%</span>
+            </div>
+            <div class="form-group">
+              <label for="m-ind-puntos">Puntaje Asignado (0 a 1 pt)</label>
+              <input type="number" id="m-ind-puntos" min="0" max="1" step="0.1" required class="input-highlight">
+              <span id="m-ind-puntos-hint" style="font-size: 0.72rem; color: #0284c7; font-weight: 600; margin-top: 2px;">≥70% = 1.0 pt | 50-69% = 0.5 pt</span>
+            </div>
+            <div class="form-group">
+              <label for="m-ind-semaforo">Estado Semáforo (Automático)</label>
+              <div style="display: flex; gap: 0.4rem; align-items: center;">
+                <select id="m-ind-semaforo" style="flex: 1;">
+                  <option value="Verde">🟢 Verde (Conforme ≥75%)</option>
+                  <option value="Amarillo">🟡 Amarillo (En Progreso 50-74%)</option>
+                  <option value="Rojo">🔴 Rojo (Crítico &lt;50%)</option>
+                </select>
+                <span id="m-ind-semaforo-badge" class="status-tag verde" style="font-size: 0.78rem;">Verde</span>
+              </div>
+              <span id="m-ind-semaforo-hint" style="font-size: 0.72rem; color: #10b981; font-weight: 600; margin-top: 2px;">Conforme</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-2">
+              <label for="m-ind-responsable">Responsable Oficial (Plan Ruta MAIS)</label>
+              <input type="text" id="m-ind-responsable" required>
+            </div>
+            <div class="form-group flex-2">
+              <label for="m-ind-fuente">Fuente de Información</label>
+              <input type="text" id="m-ind-fuente">
+            </div>
+          </div>
+
+          <!-- ENLACE GOOGLE DRIVE -->
+          <div class="form-group">
+            <label for="m-ind-drive-url" style="display: flex; justify-content: space-between; align-items: center;">
+              <span>📁 Enlace Carpeta o Archivo Google Drive (Medio de Verificación)</span>
+              <a id="btn-test-drive-link" href="#" target="_blank" class="link-drive-preview" style="font-size: 0.75rem; color: #0284c7; text-decoration: underline;">Abrir en Google Drive ↗</a>
+            </label>
+            <div class="drive-input-wrapper">
+              <input type="url" id="m-ind-drive-url" placeholder="https://drive.google.com/drive/folders/... o enlace a archivo">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="m-ind-medios">Detalle de Medios de Verificación Locales</label>
+            <textarea id="m-ind-medios" rows="2" placeholder="Describa resoluciones, actas, nóminas o pautas de cotejo de respaldo..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="m-ind-obs">Observaciones y Brechas Detectadas</label>
+            <textarea id="m-ind-obs" rows="2" placeholder="Describa el estado de implementación, dificultades encontradas o plan inmediato..."></textarea>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline" id="btn-cancel-modal-ind">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: REGISTRAR CORTE -->
+  <div id="modal-corte" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Registrar Medición de Corte</h3>
+        <button class="modal-close" id="btn-close-modal-corte">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-corte">
+          <div class="form-row">
+            <div class="form-group flex-2">
+              <label for="c-indicador">Indicador MAIS</label>
+              <select id="c-indicador" required></select>
+            </div>
+            <div class="form-group">
+              <label for="c-nombre">Nombre de Corte</label>
+              <input type="text" id="c-nombre" value="Corte Octubre 2026" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="c-fecha">Fecha de Evaluación</label>
+              <input type="date" id="c-fecha" required>
+            </div>
+            <div class="form-group">
+              <label for="c-num">Numerador (Cumplidos)</label>
+              <input type="number" id="c-num" min="0" step="1" required>
+            </div>
+            <div class="form-group">
+              <label for="c-den">Denominador (Total Evaluados)</label>
+              <input type="number" id="c-den" min="1" step="1" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group flex-2">
+              <label for="c-evaluador">Evaluador / Referente</label>
+              <input type="text" id="c-evaluador" value="Equipo Gestor MAIS" required>
+            </div>
+            <div class="form-group flex-2">
+              <label for="c-evidencia">URL Evidencia / Drive</label>
+              <input type="url" id="c-evidencia" placeholder="https://drive.google.com/...">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="c-obs">Observaciones del Corte</label>
+            <textarea id="c-obs" rows="2"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline" id="btn-cancel-modal-corte">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Registrar Medición</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: REGISTRAR RIESGO ISO -->
+  <div id="modal-riesgo" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Registrar / Editar Riesgo (ISO 9001: 6.1)</h3>
+        <button class="modal-close" id="btn-close-modal-riesgo">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-riesgo">
+          <input type="hidden" id="r-id">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="r-principio">Principio MAIS</label>
+              <select id="r-principio">
+                <option value="Centrado en la Persona">Centrado en la Persona</option>
+                <option value="Integralidad">Integralidad</option>
+                <option value="Continuidad del Cuidado">Continuidad del Cuidado</option>
+              </select>
+            </div>
+            <div class="form-group flex-2">
+              <label for="r-indicador">Indicador Asociado</label>
+              <select id="r-indicador"></select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="r-proceso">Proceso ISO 9001</label>
+            <input type="text" id="r-proceso" placeholder="ej. Gestión Documental Clínica (ISO 7.5)" required>
+          </div>
+          <div class="form-group">
+            <label for="r-factor">Factor de Riesgo / Amenaza</label>
+            <textarea id="r-factor" rows="2" placeholder="Describa el evento que puede impedir el cumplimiento del indicador..." required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="r-causa">Causa Raíz Potencial</label>
+            <input type="text" id="r-causa" placeholder="ej. Sobrecarga asistencial, falta de capacitación...">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="r-prob">Probabilidad (1 a 5)</label>
+              <select id="r-prob">
+                <option value="1">1 - Muy Baja (Raro)</option>
+                <option value="2">2 - Baja (Poco probable)</option>
+                <option value="3" selected>3 - Media (Posible)</option>
+                <option value="4">4 - Alta (Probable)</option>
+                <option value="5">5 - Muy Alta (Casi seguro)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="r-imp">Impacto (1 a 5)</label>
+              <select id="r-imp">
+                <option value="1">1 - Leve</option>
+                <option value="2">2 - Menor</option>
+                <option value="3">3 - Moderado</option>
+                <option value="4">4 - Mayor</option>
+                <option value="5" selected>5 - Catastrófico (Anula Certificación)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="r-estado">Estado del Riesgo</label>
+              <select id="r-estado">
+                <option value="En Tratamiento">En Tratamiento</option>
+                <option value="Mitigado">Mitigado</option>
+                <option value="Cerrado">Cerrado</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group flex-2">
+              <label for="r-plan">Plan de Mitigación / Acción Preventiva</label>
+              <textarea id="r-plan" rows="2" required placeholder="Medidas concretas para reducir probabilidad o impacto..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="r-responsable">Responsable</label>
+              <input type="text" id="r-responsable" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline" id="btn-cancel-modal-riesgo">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar Riesgo</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: REGISTRAR HALLAZGO PHVA -->
+  <div id="modal-hallazgo" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Registrar Plan de Mejora PHVA (ISO 9001: 10)</h3>
+        <button class="modal-close" id="btn-close-modal-hallazgo">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-hallazgo">
+          <input type="hidden" id="h-id">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="h-tipo">Tipo de Hallazgo</label>
+              <select id="h-tipo">
+                <option value="No Conformidad Menor">No Conformidad Menor</option>
+                <option value="No Conformidad Mayor">No Conformidad Mayor</option>
+                <option value="Oportunidad de Mejora">Oportunidad de Mejora</option>
+              </select>
+            </div>
+            <div class="form-group flex-2">
+              <label for="h-indicador">Indicador MAIS Afectado</label>
+              <select id="h-indicador"></select>
+            </div>
+            <div class="form-group">
+              <label for="h-fase">Fase PHVA</label>
+              <select id="h-fase">
+                <option value="Planificar">Planificar (Plan)</option>
+                <option value="Hacer">Hacer (Do)</option>
+                <option value="Verificar">Verificar (Check)</option>
+                <option value="Actuar">Actuar (Act)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="h-desc">Descripción de la Brecha / Desviación</label>
+            <textarea id="h-desc" rows="2" required placeholder="Qué se detectó que no cumple con el estándar esperado..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="h-causa">Análisis de Causa Raíz (5 Porqués / Ishikawa)</label>
+            <textarea id="h-causa" rows="2" placeholder="Por qué ocurrió? Causa de fondo (método, personas, recursos)..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="h-accion">Acción Correctiva / Preventiva Planificada</label>
+            <textarea id="h-accion" rows="2" required placeholder="Qué acciones se implementarán para eliminar la causa raíz?"></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="h-plazo">Plazo Límite</label>
+              <input type="date" id="h-plazo" required>
+            </div>
+            <div class="form-group flex-2">
+              <label for="h-responsable">Responsable de Ejecución</label>
+              <input type="text" id="h-responsable" required>
+            </div>
+            <div class="form-group">
+              <label for="h-estado">Estado del Plan</label>
+              <select id="h-estado">
+                <option value="En Ejecución">En Ejecución</option>
+                <option value="En Verificación">En Verificación</option>
+                <option value="Cerrado Conforme">Cerrado Conforme</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="h-eficacia">Verificación de Eficacia Comprobada</label>
+              <select id="h-eficacia">
+                <option value="0">No (Aún en seguimiento)</option>
+                <option value="1">Sí (Causa raíz eliminada con evidencia)</option>
+              </select>
+            </div>
+            <div class="form-group flex-2">
+              <label for="h-obs">Observaciones de Cierre</label>
+              <input type="text" id="h-obs" placeholder="Detalles de la auditoría de seguimiento o eficacia...">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline" id="btn-cancel-modal-hallazgo">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar Plan de Mejora</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: REGISTRAR AUDITORÍA -->
+  <div id="modal-auditoria" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Registrar Auditoría Clínica (Pauta de Cotejo)</h3>
+        <button class="modal-close" id="btn-close-modal-auditoria">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-auditoria">
+          <input type="hidden" id="a-id">
+          <div class="form-row">
+            <div class="form-group flex-2">
+              <label for="a-indicador">Indicador MAIS Auditado</label>
+              <select id="a-indicador" required></select>
+            </div>
+            <div class="form-group">
+              <label for="a-sector">Sector CESFAM</label>
+              <select id="a-sector">
+                <option value="Sector Verde">Sector Verde</option>
+                <option value="Sector Azul">Sector Azul</option>
+                <option value="Sector Rojo">Sector Rojo</option>
+                <option value="Sector Amarillo">Sector Amarillo</option>
+                <option value="Transversal">Transversal / Todo el Centro</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="a-fecha">Fecha Auditoría</label>
+              <input type="date" id="a-fecha" required>
+            </div>
+            <div class="form-group">
+              <label for="a-rce">Ficha / RCE ID Evaluado</label>
+              <input type="text" id="a-rce" placeholder="PAC-12345" required>
+            </div>
+            <div class="form-group">
+              <label for="a-eval">Criterios Evaluados</label>
+              <input type="number" id="a-eval" min="1" value="10" required>
+            </div>
+            <div class="form-group">
+              <label for="a-cum">Criterios Cumplidos</label>
+              <input type="number" id="a-cum" min="0" value="8" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group flex-2">
+              <label for="a-auditor">Auditor Clínico Responsable</label>
+              <input type="text" id="a-auditor" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="a-obs">Hallazgos Clínicos y Recomendaciones</label>
+            <textarea id="a-obs" rows="2" placeholder="Observaciones detalladas de la revisión de ficha o terreno..."></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline" id="btn-cancel-modal-auditoria">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar Auditoría</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- MODAL: LOGIN PROFESIONAL -->
+  <div id="modal-login" class="modal-overlay">
+    <div class="modal-card" style="max-width: 440px;">
+      <div class="modal-header" style="background: linear-gradient(135deg, #0f172a, #1e293b); color: white; border-bottom: 2px solid #3b82f6;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="login-brand-icon" style="margin: 0; width: 38px; height: 38px;">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div>
+            <h3 style="margin: 0; font-size: 1.1rem; color: white;">Acceso Sistema MAIS 2026</h3>
+            <span style="font-size: 0.75rem; color: #94a3b8;">CESFAM Cholchol · Calidad ISO 9001</span>
+          </div>
+        </div>
+        <button type="button" class="modal-close" id="btn-close-modal-login" onclick="closeModal('modal-login')" style="color: #94a3b8; cursor: pointer;">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 1.5rem;">
+        <form id="form-login">
+          <div id="login-error-alert" style="display: none; background: #fef2f2; border: 1px solid #fecaca; color: #dc2626; padding: 0.75rem; border-radius: var(--radius-md); font-size: 0.85rem; margin-bottom: 1rem;"></div>
+
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label for="login-email" style="font-weight: 600; font-size: 0.85rem;">Correo Electrónico Institucional</label>
+            <input type="email" id="login-email" placeholder="ejemplo@cholchol.cl" required style="width: 100%; padding: 0.65rem 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); font-size: 0.9rem;">
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.25rem;">
+            <label for="login-password" style="font-weight: 600; font-size: 0.85rem;">Contraseña</label>
+            <div class="password-field-wrapper">
+              <input type="password" id="login-password" placeholder="Ingresa tu contraseña" required style="width: 100%; padding: 0.65rem 2.5rem 0.65rem 0.85rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); font-size: 0.9rem;">
+              <button type="button" class="btn-toggle-password" id="btn-toggle-login-pw" title="Mostrar/ocultar contraseña">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" id="btn-submit-login" class="btn btn-primary" style="width: 100%; padding: 0.75rem; font-size: 0.95rem; font-weight: 600; justify-content: center;">
+            <span>Iniciar Sesión</span>
+          </button>
+          <button type="button" class="btn btn-outline" style="width: 100%; margin-top: 0.5rem; font-size: 0.82rem; justify-content: center;" onclick="closeModal('modal-login')">
+            <span>Continuar como Invitado (Modo Lectura)</span>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CAMBIO DE CONTRASEÑA OBLIGATORIO / VOLUNTARIO -->
+  <div id="modal-change-password" class="modal-overlay">
+    <div class="modal-card" style="max-width: 440px;">
+      <div class="modal-header">
+        <h3>Actualizar Contraseña</h3>
+        <button class="modal-close" id="btn-close-modal-pw">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="pw-change-notice" style="background: #fffbeb; border: 1px solid #fde68a; color: #b45309; padding: 0.75rem; border-radius: var(--radius-md); font-size: 0.85rem; margin-bottom: 1rem;">
+          <strong>Primer Inicio:</strong> Por seguridad institucional, debes cambiar tu clave temporal por una contraseña personal.
+        </div>
+        <form id="form-change-password">
+          <div class="form-group">
+            <label for="pw-current">Contraseña Actual (o Temporal)</label>
+            <input type="password" id="pw-current" required>
+          </div>
+          <div class="form-group">
+            <label for="pw-new">Nueva Contraseña (mínimo 6 caracteres)</label>
+            <input type="password" id="pw-new" minlength="6" required>
+          </div>
+          <div class="form-group">
+            <label for="pw-confirm">Confirmar Nueva Contraseña</label>
+            <input type="password" id="pw-confirm" minlength="6" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline" id="btn-cancel-modal-pw">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar Contraseña</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CREAR NUEVO USUARIO (ADMIN) -->
+  <div id="modal-create-user" class="modal-overlay">
+    <div class="modal-card" style="max-width: 520px;">
+      <div class="modal-header">
+        <h3>Crear Perfil de Encargado MAIS</h3>
+        <button class="modal-close" id="btn-close-modal-create-user">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-create-user">
+          <div class="form-group">
+            <label for="u-nombre">Nombre Completo del Funcionario</label>
+            <input type="text" id="u-nombre" placeholder="Ej: Dra. María Paz Morales" required>
+          </div>
+          <div class="form-group">
+            <label for="u-email">Correo Electrónico</label>
+            <input type="email" id="u-email" placeholder="funcionario@cholchol.cl" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group flex-2">
+              <label for="u-cargo">Cargo / Estamento</label>
+              <input type="text" id="u-cargo" placeholder="Ej: Enfermera Referente Calidad" required>
+            </div>
+            <div class="form-group">
+              <label for="u-rol">Rol en el Sistema</label>
+              <select id="u-rol">
+                <option value="encargado_eje">Encargado(a) de Eje</option>
+                <option value="super_admin">Super Administrador & Programador</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="u-eje">Eje de Responsabilidad Asignado</label>
+            <input type="text" id="u-eje" placeholder="Ej: Enc. Calidad, Enc. ECICEP, etc.">
+          </div>
+          <div class="form-group">
+            <label for="u-clave-temp">Clave Temporal Asignada</label>
+            <input type="text" id="u-clave-temp" value="Mais2026!Cholchol" required>
+            <small style="color: var(--text-muted);">El usuario deberá cambiarla obligatoriamente en su primer ingreso.</small>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline" id="btn-cancel-modal-create-user">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Crear Usuario</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATIONS -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script>
+
+// ============================================================================
+// CONEXIÓN UNIVERSAL EN LA NUBE PARA CUALQUIER COMPUTADOR (PORTABLE HTML)
+// ============================================================================
+const DEFAULT_APPS_SCRIPT_URL = localStorage.getItem('MAIS_CLOUD_URL') || 'https://script.google.com/macros/s/AKfycbyiE26SMtAC_l2zwEsx6-mojMf6yQgJvtd5ST70k5FGjSX2fUceZSIv5YCE48s63cPJ/exec';
+
+function saveCloudUrl() {
+  const input = document.getElementById('cloud-api-url');
+  if (input && input.value.trim()) {
+    localStorage.setItem('MAIS_CLOUD_URL', input.value.trim());
+    alert('¡Enlace en la nube de Google Sheets guardado con éxito! Recargando datos...');
+    location.reload();
+  }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const input = document.getElementById('cloud-api-url');
+  if (input && DEFAULT_APPS_SCRIPT_URL) {
+    input.value = DEFAULT_APPS_SCRIPT_URL;
+  }
+});
+
+async function safeFetchJson(url, options = {}) {
+  const cloudUrl = localStorage.getItem('MAIS_CLOUD_URL') || DEFAULT_APPS_SCRIPT_URL;
+  
+  // 1. Si tenemos configurada la URL de Google Apps Script y no estamos en servidor local
+  if (cloudUrl && (window.location.protocol === 'file:' || !window.location.host.includes('localhost'))) {
+    const cleanUrl = url.replace('/api/', '');
+    
+    if (options.method === 'PUT' || options.method === 'POST') {
+      const body = JSON.parse(options.body || '{}');
+      let payload = { action: 'update_indicador', ...body };
+      if (cleanUrl.startsWith('auth/login')) {
+        payload = { action: 'login', email: body.email, password: body.password };
+      } else if (cleanUrl.startsWith('auth/change-password')) {
+        const u = JSON.parse(localStorage.getItem('mais_gas_user') || '{}');
+        payload = { action: 'change_password', email: u.email, new_password: body.new_password };
+      } else {
+        payload = {
+          action: 'update_indicador',
+          id: cleanUrl.split('/')[1] || body.id,
+          avance: body.avance,
+          puntos: body.puntos,
+          semaforo: body.semaforo,
+          responsable: body.responsable,
+          drive_folder_url: body.drive_folder_url,
+          observaciones: body.observaciones
+        };
+      }
+      const res = await fetch(cloudUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (cleanUrl.startsWith('auth/login')) {
+        if (data.success) {
+          localStorage.setItem('mais_gas_user', JSON.stringify(data.user));
+          localStorage.setItem('mais_auth_token', data.token);
+          return { ok: true, status: 200, json: async () => ({ status: 'success', token: data.token, user: data.user }) };
+        } else {
+          return { ok: false, status: 401, json: async () => ({ status: 'error', error: data.error }) };
+        }
+      }
+      return data;
+    } else {
+      // GET requests via ?api=...
+      const endpoint = cleanUrl.split('?')[0].split('/')[0];
+      const subId = cleanUrl.includes('/') ? cleanUrl.split('/')[1].split('?')[0] : null;
+      const targetUrl = cloudUrl + (cloudUrl.includes('?') ? '&' : '?') + 'api=' + endpoint;
+      const res = await fetch(targetUrl);
+      const data = await res.json();
+      if (subId && Array.isArray(data)) {
+        return data.find(x => x.id === subId || x.codigo === subId) || data[0];
+      }
+      return data;
+    }
+  }
+
+  // 2. Fallback normal al servidor local (si corre en este PC o en red local)
+  try {
+    const res = await fetch(url, options);
+    return await res.json();
+  } catch (err) {
+    console.warn('Conexión local no disponible, intentando Google Sheets...', err);
+    throw err;
+  }
+}
+
+
+window.printReport = function() {
+  window.print();
+};
+
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+// SISTEMA DE GESTIÓN Y MONITOREO MAIS 2026 - DSSAS / ISO 9001
+// Frontend Application Controller
+
+const API_BASE = '/api';
+
+// State container
+const state = {
+  dashboard: null,
+  indicadores: [],
+  encargados: [],
+  cortes: [],
+  riesgos: [],
+  hallazgos: [],
+  auditorias: [],
+  users: [],
+  currentUser: null,
+  authToken: localStorage.getItem('mais_auth_token') || null,
+  activeTab: 'tab-dashboard',
+  filters: {
+    search: '',
+    principio: '',
+    componente: '',
+    obligatorio: '',
+    semaforo: '',
+    responsable: ''
+  }
+};
+
+// DOM Content Loaded
+document.addEventListener('DOMContentLoaded', () => {
+  initTabs();
+  initEventListeners();
+  initAuth();
+  loadAllData();
+});
+
+// INITIALIZE NAVIGATION TABS
+function initTabs() {
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetTab = btn.getAttribute('data-tab');
+      switchTab(targetTab);
+    });
+  });
+}
+
+function switchTab(tabId) {
+  state.activeTab = tabId;
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-tab') === tabId);
+  });
+  document.querySelectorAll('.tab-pane').forEach(p => {
+    p.classList.toggle('active', p.id === tabId);
+  });
+  if (tabId === 'tab-encargados') {
+    loadEncargados();
+  }
+  if (tabId === 'tab-usuarios') {
+    loadUsersTable();
+  }
+}
+
+// LOAD ALL INITIAL DATA
+async function loadAllData() {
+  await Promise.all([
+    loadDashboard(),
+    loadIndicadores(),
+    loadEncargados(),
+    loadCortes(),
+    loadRiesgos(),
+    loadHallazgos(),
+    loadAuditorias()
+  ]);
+  populateSelects();
+}
+
+// 1. DASHBOARD CONTROLLER
+async function loadDashboard() {
+  try {
+    const data = await safeFetchJson(`${API_BASE}/dashboard`);
+    state.dashboard = data;
+    renderDashboard(data);
+  } catch (err) {
+    showToast('Error al cargar datos del Dashboard', 'error');
+  }
+}
+
+function renderDashboard(data) {
+  const { resumen, principios, componentes, riesgos_iso } = data;
+
+  // BANNER CERTIFICACIÓN
+  const banner = document.getElementById('certification-banner');
+  const isCertified = resumen.certifica;
+  const allObOk = resumen.obligatorios_aprobados === resumen.obligatorios_totales;
+
+  let bannerClass = 'not-certified';
+  let bannerIcon = '⚠️';
+  let bannerTitle = resumen.estado_dictamen;
+  let bannerMsg = 'El centro no alcanza los requisitos mínimos exigidos por el Servicio de Salud Araucanía Sur.';
+
+  if (isCertified) {
+    bannerClass = 'certified';
+    bannerIcon = '🏆';
+    bannerTitle = 'ESTABLECIMIENTO CERTIFICADO MAIS 2026';
+    bannerMsg = `Cumple exitosamente con el ${resumen.porcentaje_global}% del puntaje general (umbral ≥ 65%) y el 100% de los 10 Indicadores Obligatorios requeridos por la Guía DSSAS 2026.`;
+  } else if (resumen.porcentaje_global >= 65.0 && !allObOk) {
+    bannerClass = 'in-progress';
+    bannerIcon = '⏳';
+    bannerTitle = 'CERTIFICACIÓN BLOQUEADA POR INDICADORES OBLIGATORIOS';
+    bannerMsg = `Alcanza el puntaje global requerido (${resumen.porcentaje_global}%), pero tiene pendientes ${resumen.obligatorios_totales - resumen.obligatorios_aprobados} indicadores obligatorios excluyentes.`;
+  } else {
+    bannerMsg = `Puntaje actual: ${resumen.porcentaje_global}%. Se requiere alcanzar mínimo 65.0% (24.7 pts) y aprobar la totalidad de los 10 indicadores obligatorios.`;
+  }
+
+  banner.className = `cert-banner ${bannerClass}`;
+  banner.innerHTML = `
+    <div class="cert-banner-left">
+      <div class="cert-icon-badge">${bannerIcon}</div>
+      <div class="cert-banner-text">
+        <h2>${bannerTitle}</h2>
+        <p>${bannerMsg}</p>
+      </div>
+    </div>
+    <div class="cert-banner-badges">
+      <div class="cert-status-chip">${resumen.porcentaje_global}% CUMPLIMIENTO</div>
+    </div>
+  `;
+
+  // STAT CARDS
+  document.getElementById('kpi-pts-val').textContent = `${resumen.puntos_obtenidos} / ${resumen.puntaje_maximo}`;
+  document.getElementById('kpi-pts-pct').textContent = `${resumen.porcentaje_global}% Cumplimiento Global`;
+  document.getElementById('kpi-pts-bar').style.width = `${Math.min(resumen.porcentaje_global, 100)}%`;
+
+  document.getElementById('kpi-ob-val').textContent = `${resumen.obligatorios_aprobados} / ${resumen.obligatorios_totales}`;
+  document.getElementById('kpi-ob-pct').textContent = `${resumen.obligatorios_cumplimiento}% Aprobados`;
+  document.getElementById('kpi-ob-bar').style.width = `${resumen.obligatorios_cumplimiento}%`;
+
+  // Riesgos ISO
+  const totRiesgos = Object.values(riesgos_iso).reduce((a, b) => a + b, 0);
+  document.getElementById('kpi-riesgos-val').textContent = `${totRiesgos} Registrados`;
+  const rBreakdown = document.getElementById('kpi-riesgos-breakdown');
+  rBreakdown.innerHTML = `
+    <span class="r-dot critico" title="Riesgos Críticos">${riesgos_iso['Crítico'] || 0} Críticos</span>
+    <span class="r-dot alto" title="Riesgos Altos">${riesgos_iso['Alto'] || 0} Altos</span>
+    <span class="r-dot medio" title="Riesgos Medios">${riesgos_iso['Medio'] || 0} Medios</span>
+  `;
+
+  // Mejora continua PHVA
+  const totMejora = Object.values(data.hallazgos_mejora).reduce((a, b) => a + b, 0);
+  document.getElementById('kpi-mejora-val').textContent = `${totMejora} Planes`;
+
+  // LISTAS PRINCIPIOS
+  const prinContainer = document.getElementById('principios-container');
+  prinContainer.innerHTML = '';
+  for (const [pName, pData] of Object.entries(principios)) {
+    const pEl = document.createElement('div');
+    pEl.className = 'prin-item';
+    pEl.innerHTML = `
+      <div class="prin-info">
+        <span class="prin-name">${pName} <span class="prin-count">(${pData.total} ind. · ${pData.obligatorios_ok}/${pData.obligatorios_tot} oblig.)</span></span>
+        <span class="prin-score">${pData.puntos} pts (${pData.pct}%)</span>
+      </div>
+      <div class="prin-bar-bg">
+        <div class="prin-bar-fill" style="width: ${pData.pct}%"></div>
+      </div>
+    `;
+    prinContainer.appendChild(pEl);
+  }
+
+  // LISTAS COMPONENTES
+  const compContainer = document.getElementById('componentes-container');
+  compContainer.innerHTML = '';
+  for (const [cName, cData] of Object.entries(componentes)) {
+    const cEl = document.createElement('div');
+    cEl.className = 'prin-item';
+    cEl.innerHTML = `
+      <div class="prin-info">
+        <span class="prin-name">${cName} <span class="prin-count">(${cData.total} indicadores)</span></span>
+        <span class="prin-score">${cData.puntos} pts (${cData.pct}%)</span>
+      </div>
+      <div class="prin-bar-bg">
+        <div class="prin-bar-fill" style="width: ${cData.pct}%"></div>
+      </div>
+    `;
+    compContainer.appendChild(cEl);
+  }
+}
+
+// 2. INDICADORES CONTROLLER (CRUD)
+async function loadIndicadores() {
+  try {
+    const query = new URLSearchParams();
+    if (state.filters.search) query.append('search', state.filters.search);
+    if (state.filters.principio) query.append('principio', state.filters.principio);
+    if (state.filters.componente) query.append('componente', state.filters.componente);
+    if (state.filters.obligatorio !== '') query.append('obligatorio', state.filters.obligatorio);
+    if (state.filters.semaforo) query.append('semaforo', state.filters.semaforo);
+
+    const data = await safeFetchJson(`${API_BASE}/indicadores?${query.toString()}`);
+    state.indicadores = data;
+    renderIndicadores(data);
+    renderObligatoriosDashboard(data);
+  } catch (err) {
+    showToast('Error al cargar la matriz de indicadores', 'error');
+  }
+}
+
+function renderIndicadores(items) {
+  const tbody = document.getElementById('tbody-indicadores');
+  tbody.innerHTML = '';
+
+  // Apply responsable filter if set
+  let filtered = items;
+  if (state.filters.responsable) {
+    filtered = filtered.filter(i => (i.responsable || '').includes(state.filters.responsable));
+  }
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="11" style="text-align: center; padding: 2rem; color: #94a3b8;">No se encontraron indicadores con los filtros aplicados.</td></tr>`;
+    return;
+  }
+
+  filtered.forEach(ind => {
+    const tr = document.createElement('tr');
+    const semClass = (ind.semaforo || 'Verde').toLowerCase();
+    const isOb = ind.obligatorio === 1;
+    const driveUrl = ind.drive_folder_url || 'https://drive.google.com/drive/folders/mais_cholchol_2026';
+
+    tr.innerHTML = `
+      <td><strong>${ind.id}</strong></td>
+      <td><span style="font-size: 0.8rem; font-weight: 500;">${ind.principio}</span></td>
+      <td><span style="font-size: 0.78rem; color: #64748b;">${ind.componente}</span></td>
+      <td>
+        <div style="font-weight: 700; color: #0f172a;">${ind.nombre_corto}</div>
+        <div style="font-size: 0.76rem; color: #0369a1; margin-top: 2px;"><strong>Criterio Ruta:</strong> ${ind.criterio_ruta || ind.minimos_aprobacion}</div>
+      </td>
+      <td><span class="tag-ob ${isOb ? 'si' : 'no'}">${isOb ? 'Obligatorio' : 'General'}</span></td>
+      <td><strong>${ind.avance}%</strong></td>
+      <td><strong>${ind.puntos}</strong> / 1.0</td>
+      <td><span class="status-tag ${semClass}">${ind.semaforo || 'Verde'}</span></td>
+      <td style="font-size: 0.78rem; font-weight: 600; color: #1e293b;">${ind.responsable || 'Equipo MAIS'}</td>
+      <td>
+        <a href="${driveUrl}" target="_blank" class="btn-drive" title="Abrir carpeta o archivo en Google Drive">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          <span>Drive</span>
+        </a>
+      </td>
+      <td>
+        <div class="action-btn-group">
+          <button class="btn-icon" onclick="openEditIndicador('${ind.id}')" title="Ver guía, escala y editar">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Guía / Editar
+          </button>
+        </div>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function renderObligatoriosDashboard(items) {
+  const tbody = document.getElementById('tbody-obligatorios-dash');
+  tbody.innerHTML = '';
+
+  const obligatorios = items.filter(i => i.obligatorio === 1);
+  obligatorios.forEach(ind => {
+    const tr = document.createElement('tr');
+    const semClass = (ind.semaforo || 'Verde').toLowerCase();
+    tr.innerHTML = `
+      <td><strong>${ind.id}</strong></td>
+      <td>${ind.principio}</td>
+      <td><strong>${ind.nombre_corto}</strong></td>
+      <td>${ind.meta}%</td>
+      <td><strong>${ind.avance}%</strong></td>
+      <td><strong>${ind.puntos} pt</strong></td>
+      <td><span class="status-tag ${semClass}">${ind.semaforo}</span></td>
+      <td>
+        <button class="btn-icon" onclick="openEditIndicador('${ind.id}')">
+          Gestionar
+        </button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// 3. EDITAR / DETALLE INDICADOR MODAL
+async function openEditIndicador(indId) {
+  try {
+    let ind = null;
+    try {
+      const res = await fetch(`${API_BASE}/indicadores/${indId}`);
+      if (res.ok) {
+        ind = await res.json();
+      }
+    } catch (e) {
+      console.warn('Fallo fetch /indicadores/', indId, e);
+    }
+
+    // Fallback si no vino de la API o vino como arreglo
+    if (!ind || Array.isArray(ind)) {
+      if (Array.isArray(ind)) {
+        ind = ind.find(x => x.id === indId || x.codigo === indId);
+      }
+      if (!ind && state.indicadores && state.indicadores.length > 0) {
+        ind = state.indicadores.find(x => x.id === indId || x.codigo === indId);
+      }
+    }
+
+    if (!ind) {
+      showToast(`No se encontró información del indicador ${indId}`, 'error');
+      return;
+    }
+
+    document.getElementById('m-ind-id').value = ind.id;
+    document.getElementById('m-ind-code').textContent = ind.id;
+    document.getElementById('m-ind-title').textContent = ind.nombre_corto;
+    document.getElementById('m-ind-oficial').value = ind.nombre_oficial;
+    document.getElementById('m-ind-ob').value = ind.obligatorio ? 'CRÍTICO OBLIGATORIO (Excluyente para Certificación)' : 'No Obligatorio (General)';
+    document.getElementById('m-ind-principio').value = ind.principio;
+    document.getElementById('m-ind-componente').value = ind.componente;
+    document.getElementById('m-ind-proceso').value = ind.proceso_iso || 'Gestión de Calidad';
+    document.getElementById('m-ind-minimos').innerHTML = `<strong>Criterio Normativo DSSAS 2026:</strong> ${ind.minimos_aprobacion}`;
+
+    // POPULATE ESCALA DE PUNTOS
+    const escalaContainer = document.getElementById('m-ind-escala-box');
+    let escalaObj = {};
+    if (ind.escala_pts_json) {
+      try { escalaObj = JSON.parse(ind.escala_pts_json); } catch (e) { escalaObj = {}; }
+    } else if (ind.escala_pts) {
+      escalaObj = ind.escala_pts;
+    }
+
+    const p10 = escalaObj['1.0'] || 'Cumplimiento del 100% de los criterios y metas exigidas.';
+    const p05 = escalaObj['0.5'] || 'Cumplimiento parcial (entre 50% y 69% o proceso en desarrollo sustantivo).';
+    const p00 = escalaObj['0.0'] || 'Menor al 50% de avance o falta de verificadores normados.';
+
+    escalaContainer.innerHTML = `
+      <div class="escala-row p10">
+        <span class="escala-badge">1.0 Punto (100%)</span>
+        <div><strong>Aprobado Total:</strong> ${p10}</div>
+      </div>
+      <div class="escala-row p05">
+        <span class="escala-badge">0.5 Puntos (50%)</span>
+        <div><strong>Avance Parcial:</strong> ${p05}</div>
+      </div>
+      <div class="escala-row p00">
+        <span class="escala-badge">0.0 Puntos (0%)</span>
+        <div><strong>Insuficiente:</strong> ${p00}</div>
+      </div>
+    `;
+
+    // GUIA OPERATIVA Y VERIFICADORES
+    document.getElementById('m-ind-guia-paso').textContent = ind.guia_operativa || 'Siga los procedimientos establecidos en el manual del establecimiento.';
+    document.getElementById('m-ind-preguntas-auditoria').textContent = ind.preguntas_auditoria || '¿Se cuenta con los respaldos documentales y registros clínicos respectivos?';
+    document.getElementById('m-ind-verificador-ruta').textContent = ind.verificador_ruta || ind.medios_verificacion || 'Verificador oficial archivado.';
+
+    // FORM FIELDS
+    document.getElementById('m-ind-avance').value = ind.avance;
+    document.getElementById('m-ind-meta').value = ind.meta;
+    document.getElementById('m-ind-puntos').value = ind.puntos;
+    document.getElementById('m-ind-semaforo').value = ind.semaforo || 'Verde';
+    document.getElementById('m-ind-responsable').value = ind.responsable || 'Equipo Gestor MAIS';
+    document.getElementById('m-ind-fuente').value = ind.fuente_datos || '';
+    document.getElementById('m-ind-medios').value = ind.medios_verificacion || '';
+    document.getElementById('m-ind-obs').value = ind.observaciones || '';
+
+    // GOOGLE DRIVE URL
+    const driveUrl = ind.drive_folder_url || 'https://drive.google.com/drive/folders/mais_cholchol_2026';
+    document.getElementById('m-ind-drive-url').value = driveUrl;
+    const testLink = document.getElementById('btn-test-drive-link');
+    testLink.href = driveUrl;
+
+    // UPDATE DYNAMIC SEMAFORO BADGE & PUNTAJE IN MODAL
+    updateModalAutoCalc(ind.avance);
+
+    // CONTROL DE PERMISOS POR ROL Y EJE
+    checkIndicadorPermissions(ind);
+
+    openModal('modal-indicador');
+  } catch (err) {
+    showToast('Error al abrir detalle del indicador', 'error');
+  }
+}
+
+// AUTO-CALCULATION HELPER FOR INDICATOR MODAL
+function updateModalAutoCalc(avanceVal) {
+  const val = parseFloat(avanceVal) || 0;
+  const puntosInput = document.getElementById('m-ind-puntos');
+  const puntosHint = document.getElementById('m-ind-puntos-hint');
+  const semSelect = document.getElementById('m-ind-semaforo');
+  const semBadge = document.getElementById('m-ind-semaforo-badge');
+  const semHint = document.getElementById('m-ind-semaforo-hint');
+
+  // Rule DSSAS: >= 70% -> 1.0 pt, 50-69% -> 0.5 pt, <50% -> 0.0 pt
+  const puntos = val >= 70.0 ? 1.0 : (val >= 50.0 ? 0.5 : 0.0);
+  if (puntosInput) puntosInput.value = puntos;
+  if (puntosHint) {
+    puntosHint.textContent = puntos === 1.0 ? '✅ 1.0 pt (Aprobado Total)' : (puntos === 0.5 ? '⚠️ 0.5 pt (Avance Parcial)' : '❌ 0.0 pt (Insuficiente)');
+    puntosHint.style.color = puntos === 1.0 ? '#059669' : (puntos === 0.5 ? '#d97706' : '#dc2626');
+  }
+
+  // Rule Semáforo: >= 75% -> Verde, 50-74% -> Amarillo, <50% -> Rojo
+  const semaforo = val >= 75.0 ? 'Verde' : (val >= 50.0 ? 'Amarillo' : 'Rojo');
+  if (semSelect) semSelect.value = semaforo;
+  if (semBadge) {
+    semBadge.className = `status-tag ${semaforo.toLowerCase()}`;
+    semBadge.textContent = semaforo;
+  }
+  if (semHint) {
+    semHint.textContent = semaforo === 'Verde' ? '🟢 Conforme (≥75%)' : (semaforo === 'Amarillo' ? '🟡 En Progreso (50-74%)' : '🔴 Crítico (<50%)');
+    semHint.style.color = semaforo === 'Verde' ? '#059669' : (semaforo === 'Amarillo' ? '#d97706' : '#dc2626');
+  }
+}
+
+// 3.5 ENCARGADOS POR EJE CONTROLLER
+async function loadEncargados() {
+  try {
+    const data = await safeFetchJson(`${API_BASE}/encargados`);
+    state.encargados = data;
+    renderEncargados(data);
+  } catch (err) {
+    showToast('Error al cargar la distribución de encargados', 'error');
+  }
+}
+
+function renderEncargados(items) {
+  const container = document.getElementById('encargados-container');
+  if (!container) return;
+  container.innerHTML = '';
+
+  if (items.length === 0) {
+    container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: #94a3b8;">No hay encargados registrados.</div>`;
+    return;
+  }
+
+  items.forEach(enc => {
+    const card = document.createElement('div');
+    card.className = 'encargado-card';
+
+    const indItemsHtml = enc.indicadores.map(ind => {
+      const isOb = ind.obligatorio === 1;
+      const semClass = (ind.semaforo || 'Verde').toLowerCase();
+      const driveUrl = ind.drive_folder_url || 'https://drive.google.com/drive/folders/mais_cholchol_2026';
+      return `
+        <div class="enc-ind-item">
+          <div class="enc-ind-left">
+            <strong>[${ind.id}]</strong>
+            <span style="font-weight: 600;">${ind.nombre_corto}</span>
+            ${isOb ? '<span class="tag-ob si" style="font-size:0.65rem; padding:0.1rem 0.35rem;">OB</span>' : ''}
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.4rem;">
+            <span class="status-tag ${semClass}" style="font-size: 0.68rem; padding: 0.15rem 0.45rem;">${ind.avance}%</span>
+            <a href="${driveUrl}" target="_blank" class="btn-drive" style="padding: 0.15rem 0.4rem; font-size: 0.68rem;" title="Abrir carpeta Google Drive">Drive</a>
+            <button class="btn-icon" style="padding: 0.15rem 0.4rem; font-size: 0.68rem;" onclick="openEditIndicador('${ind.id}')">Editar</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    card.innerHTML = `
+      <div class="encargado-header">
+        <div class="encargado-title">
+          <span class="encargado-role">Referente Responsable</span>
+          <h3>${enc.responsable}</h3>
+        </div>
+        <div class="encargado-meta">
+          <span class="enc-badge">${enc.total_indicadores} ind.</span>
+          ${enc.obligatorios_totales > 0 ? `<span class="enc-badge ob">${enc.obligatorios_aprobados}/${enc.obligatorios_totales} Obligatorios</span>` : ''}
+        </div>
+      </div>
+
+      <div class="encargado-progress-block">
+        <div class="enc-prog-info">
+          <span>Cumplimiento Promedio</span>
+          <span style="color: var(--primary);">${enc.promedio_avance}% (${enc.total_puntos} pts)</span>
+        </div>
+        <div class="stat-progress-bar">
+          <div class="stat-progress-fill ${enc.promedio_avance >= 75 ? 'success' : ''}" style="width: ${enc.promedio_avance}%"></div>
+        </div>
+      </div>
+
+      <div class="enc-ind-list">
+        <div style="font-size: 0.75rem; font-weight: 700; color: #475569; text-transform: uppercase; margin-bottom: 0.25rem;">
+          Indicadores Asignados en Ruta MAIS:
+        </div>
+        ${indItemsHtml}
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+// 4. CORTES CONTROLLER
+async function loadCortes() {
+  try {
+    const data = await safeFetchJson(`${API_BASE}/cortes`);
+    state.cortes = data;
+    renderCortes(data);
+  } catch (err) {
+    showToast('Error al cargar mediciones de corte', 'error');
+  }
+}
+
+function renderCortes(items) {
+  const tbody = document.getElementById('tbody-cortes');
+  tbody.innerHTML = '';
+
+  if (items.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="12" style="text-align: center; padding: 2rem; color: #94a3b8;">No hay registros de corte ingresados.</td></tr>`;
+    return;
+  }
+
+  items.forEach(c => {
+    const tr = document.createElement('tr');
+    const semClass = (c.estado_semaforo || 'Verde').toLowerCase();
+    tr.innerHTML = `
+      <td><strong>#${c.id}</strong></td>
+      <td><strong>${c.corte_nombre}</strong></td>
+      <td>${c.fecha}</td>
+      <td><strong>${c.indicador_id}</strong> ${c.nombre_corto ? `(${c.nombre_corto})` : ''}</td>
+      <td>${c.numerador}</td>
+      <td>${c.denominador}</td>
+      <td><strong>${c.porcentaje}%</strong></td>
+      <td>${c.meta}%</td>
+      <td><span class="status-tag ${semClass}">${c.estado_semaforo}</span></td>
+      <td>${c.evaluador || '-'}</td>
+      <td>
+        ${c.evidencia_url ? `<a href="${c.evidencia_url}" target="_blank" style="color: #0284c7; text-decoration: underline;">Ver Enlace</a>` : '<span style="color:#94a3b8;">Sin enlace</span>'}
+      </td>
+      <td>
+        <button class="btn-icon" onclick="deleteRecord('cortes', ${c.id})">Eliminar</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// 5. GESTIÓN DE RIESGOS ISO 9001 CONTROLLER
+async function loadRiesgos() {
+  try {
+    const data = await safeFetchJson(`${API_BASE}/riesgos`);
+    state.riesgos = data;
+    renderRiesgos(data);
+  } catch (err) {
+    showToast('Error al cargar matriz de riesgos', 'error');
+  }
+}
+
+function renderRiesgos(items) {
+  const tbody = document.getElementById('tbody-riesgos');
+  tbody.innerHTML = '';
+
+  if (items.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="12" style="text-align: center; padding: 2rem; color: #94a3b8;">No hay riesgos registrados en la matriz.</td></tr>`;
+    return;
+  }
+
+  items.forEach(r => {
+    const tr = document.createElement('tr');
+    const nivClass = (r.nivel_clasificacion || 'Medio').toLowerCase();
+    tr.innerHTML = `
+      <td><strong>${r.id}</strong></td>
+      <td><div style="font-weight: 600;">${r.principio}</div><div style="font-size: 0.75rem; color: #64748b;">${r.indicador_id || 'General'}</div></td>
+      <td><span style="font-size: 0.8rem;">${r.proceso_iso}</span></td>
+      <td><strong>${r.factor_riesgo}</strong></td>
+      <td style="text-align: center;">${r.probabilidad}</td>
+      <td style="text-align: center;">${r.impacto}</td>
+      <td style="text-align: center;"><strong>${r.severidad}</strong></td>
+      <td><span class="r-dot ${nivClass}">${r.nivel_clasificacion}</span></td>
+      <td style="font-size: 0.8rem;">${r.plan_mitigacion}</td>
+      <td style="font-size: 0.8rem; color: #475569;">${r.responsable}</td>
+      <td><span class="badge-pill">${r.estado}</span></td>
+      <td>
+        <button class="btn-icon" onclick="deleteRecord('riesgos', '${r.id}')">Eliminar</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// 6. CICLO PHVA Y MEJORA CONTINUA CONTROLLER
+async function loadHallazgos() {
+  try {
+    const data = await safeFetchJson(`${API_BASE}/hallazgos`);
+    state.hallazgos = data;
+    renderHallazgos(data);
+  } catch (err) {
+    showToast('Error al cargar planes de mejora continua', 'error');
+  }
+}
+
+function renderHallazgos(items) {
+  const tbody = document.getElementById('tbody-hallazgos');
+  tbody.innerHTML = '';
+
+  if (items.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="13" style="text-align: center; padding: 2rem; color: #94a3b8;">No hay hallazgos o planes de mejora registrados.</td></tr>`;
+    return;
+  }
+
+  items.forEach(h => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><strong>${h.id}</strong></td>
+      <td>${h.fecha}</td>
+      <td><span class="badge-pill">${h.tipo}</span></td>
+      <td><strong>${h.indicador_id || 'General'}</strong></td>
+      <td><strong>${h.descripcion}</strong></td>
+      <td style="font-size: 0.8rem; color: #64748b;">${h.causa_raiz || '-'}</td>
+      <td style="font-size: 0.8rem;">${h.accion_propuesta}</td>
+      <td><strong>${h.fase_phva}</strong></td>
+      <td>${h.plazo_limite || '-'}</td>
+      <td style="font-size: 0.8rem;">${h.responsable}</td>
+      <td><span class="status-tag ${h.estado === 'Cerrado Conforme' ? 'verde' : 'amarillo'}">${h.estado}</span></td>
+      <td>${h.eficacia_verificada ? '✅ Verificada' : '⏳ Pendiente'}</td>
+      <td>
+        <button class="btn-icon" onclick="deleteRecord('hallazgos', '${h.id}')">Eliminar</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// 7. AUDITORÍAS CLÍNICAS CONTROLLER
+async function loadAuditorias() {
+  try {
+    const data = await safeFetchJson(`${API_BASE}/auditorias`);
+    state.auditorias = data;
+    renderAuditorias(data);
+  } catch (err) {
+    showToast('Error al cargar auditorías clínicas', 'error');
+  }
+}
+
+function renderAuditorias(items) {
+  const tbody = document.getElementById('tbody-auditorias');
+  tbody.innerHTML = '';
+
+  if (items.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="12" style="text-align: center; padding: 2rem; color: #94a3b8;">No hay auditorías registradas.</td></tr>`;
+    return;
+  }
+
+  items.forEach(a => {
+    const tr = document.createElement('tr');
+    const isConf = a.conformidad_iso === 'Conforme';
+    tr.innerHTML = `
+      <td><strong>${a.id}</strong></td>
+      <td>${a.fecha}</td>
+      <td><strong>${a.indicador_id}</strong></td>
+      <td>${a.sector}</td>
+      <td><code>${a.paciente_rce_id}</code></td>
+      <td style="text-align: center;">${a.criterios_evaluados}</td>
+      <td style="text-align: center;">${a.criterios_cumplidos}</td>
+      <td><strong>${a.porcentaje_conformidad}%</strong></td>
+      <td><span class="status-tag ${isConf ? 'verde' : 'rojo'}">${a.conformidad_iso}</span></td>
+      <td>${a.auditor}</td>
+      <td style="font-size: 0.8rem; color: #64748b;">${a.observaciones || '-'}</td>
+      <td>
+        <button class="btn-icon" onclick="deleteRecord('auditorias', '${a.id}')">Eliminar</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// POPULATE SELECT DROPDOWNS IN MODALS
+function populateSelects() {
+  const cIndSelect = document.getElementById('c-indicador');
+  const rIndSelect = document.getElementById('r-indicador');
+  const hIndSelect = document.getElementById('h-indicador');
+  const aIndSelect = document.getElementById('a-indicador');
+
+  const options = state.indicadores.map(i => `<option value="${i.id}">[${i.id}] ${i.nombre_corto}</option>`).join('');
+
+  if (cIndSelect) cIndSelect.innerHTML = options;
+  if (rIndSelect) rIndSelect.innerHTML = `<option value="">General / Todo el Modelo</option>` + options;
+  if (hIndSelect) hIndSelect.innerHTML = `<option value="">General / Todo el Modelo</option>` + options;
+  if (aIndSelect) aIndSelect.innerHTML = options;
+}
+
+// GENERIC DELETE HANDLER
+async function deleteRecord(endpoint, id) {
+  if (!confirm(`¿Está seguro de eliminar el registro ${id}?`)) return;
+  try {
+    const res = await fetch(`${API_BASE}/${endpoint}/${id}`, { method: 'DELETE' });
+    if (res.ok) {
+      showToast(`Registro ${id} eliminado correctamente`, 'info');
+      if (endpoint === 'cortes') loadCortes();
+      else if (endpoint === 'riesgos') { loadRiesgos(); loadDashboard(); }
+      else if (endpoint === 'hallazgos') { loadHallazgos(); loadDashboard(); }
+      else if (endpoint === 'auditorias') { loadAuditorias(); loadDashboard(); }
+    } else {
+      showToast('Error al eliminar registro', 'error');
+    }
+  } catch (err) {
+    showToast('Error de conexión', 'error');
+  }
+}
+
+// EVENT LISTENERS & FORMS
+function initEventListeners() {
+  // Sync with Google Sheets
+  const syncBtn = document.getElementById('btn-sync-sheets');
+  const syncBtnText = document.getElementById('sync-btn-text');
+  syncBtn.addEventListener('click', async () => {
+    try {
+      syncBtnText.textContent = 'Sincronizando...';
+      syncBtn.disabled = true;
+      const res = await fetch(`${API_BASE}/sync/push`, { method: 'POST' });
+      const json = await res.json();
+      if (json.status === 'success') {
+        showToast('¡Planilla Google Sheets sincronizada exitosamente!', 'success');
+      } else {
+        showToast(`Error al sincronizar: ${json.message}`, 'error');
+      }
+    } catch (err) {
+      showToast('Error de red al sincronizar con Google Sheets', 'error');
+    } finally {
+      syncBtnText.textContent = 'Sincronizar Google Sheets';
+      syncBtn.disabled = false;
+    }
+  });
+
+  // Export CSV
+  document.getElementById('btn-export-csv').addEventListener('click', () => {
+    window.location.href = `${API_BASE}/export/csv`;
+  });
+
+  // Filters for Indicadores
+  const searchInput = document.getElementById('filter-search');
+  let debounceTimer;
+  searchInput.addEventListener('input', (e) => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      state.filters.search = e.target.value.trim();
+      loadIndicadores();
+    }, 250);
+  });
+
+  document.getElementById('filter-principio').addEventListener('change', (e) => {
+    state.filters.principio = e.target.value;
+    loadIndicadores();
+  });
+  document.getElementById('filter-componente').addEventListener('change', (e) => {
+    state.filters.componente = e.target.value;
+    loadIndicadores();
+  });
+  document.getElementById('filter-obligatorio').addEventListener('change', (e) => {
+    state.filters.obligatorio = e.target.value;
+    loadIndicadores();
+  });
+  document.getElementById('filter-semaforo').addEventListener('change', (e) => {
+    state.filters.semaforo = e.target.value;
+    loadIndicadores();
+  });
+
+  const respFilter = document.getElementById('filter-responsable');
+  if (respFilter) {
+    respFilter.addEventListener('change', (e) => {
+      state.filters.responsable = e.target.value;
+      loadIndicadores();
+    });
+  }
+
+  // Real-time auto-calculation of points and semáforo when typing advance %
+  const mAvanceInput = document.getElementById('m-ind-avance');
+  if (mAvanceInput) {
+    mAvanceInput.addEventListener('input', (e) => {
+      updateModalAutoCalc(e.target.value);
+    });
+  }
+
+  // Update drive preview link when typing in modal
+  const mDriveInput = document.getElementById('m-ind-drive-url');
+  const mDriveLink = document.getElementById('btn-test-drive-link');
+  if (mDriveInput && mDriveLink) {
+    mDriveInput.addEventListener('input', (e) => {
+      mDriveLink.href = e.target.value.trim() || '#';
+    });
+  }
+
+  // Modal open buttons
+  document.getElementById('btn-add-corte').addEventListener('click', () => openModal('modal-corte'));
+  document.getElementById('btn-add-riesgo').addEventListener('click', () => openModal('modal-riesgo'));
+  document.getElementById('btn-add-hallazgo').addEventListener('click', () => openModal('modal-hallazgo'));
+  document.getElementById('btn-add-auditoria').addEventListener('click', () => openModal('modal-auditoria'));
+
+  // Modal close buttons
+  setupModalClose('modal-indicador', 'btn-close-modal-ind', 'btn-cancel-modal-ind');
+  setupModalClose('modal-corte', 'btn-close-modal-corte', 'btn-cancel-modal-corte');
+  setupModalClose('modal-riesgo', 'btn-close-modal-riesgo', 'btn-cancel-modal-riesgo');
+  setupModalClose('modal-hallazgo', 'btn-close-modal-hallazgo', 'btn-cancel-modal-hallazgo');
+  setupModalClose('modal-auditoria', 'btn-close-modal-auditoria', 'btn-cancel-modal-auditoria');
+
+  // Form Submits
+  initFormSubmits();
+}
+
+function setupModalClose(modalId, closeBtnId, cancelBtnId) {
+  const modal = document.getElementById(modalId);
+  const closeBtn = document.getElementById(closeBtnId);
+  const cancelBtn = document.getElementById(cancelBtnId);
+
+  if (closeBtn) closeBtn.addEventListener('click', () => closeModal(modalId));
+  if (cancelBtn) cancelBtn.addEventListener('click', () => closeModal(modalId));
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal(modalId);
+  });
+}
+
+window.openModal = function(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.classList.add('active');
+    modal.style.display = 'flex';
+    modal.style.visibility = 'visible';
+    modal.style.opacity = '1';
+    modal.style.zIndex = '99999';
+  }
+};
+
+window.closeModal = function(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.classList.remove('active');
+    modal.style.display = 'none';
+    modal.style.visibility = 'hidden';
+    modal.style.opacity = '0';
+  }
+};
+
+function openModal(modalId) {
+  window.openModal(modalId);
+}
+
+function closeModal(modalId) {
+  window.closeModal(modalId);
+}
+
+function initFormSubmits() {
+  // 1. Submit Indicador Edit
+  document.getElementById('form-indicador').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const indId = document.getElementById('m-ind-id').value;
+    const body = {
+      avance: parseFloat(document.getElementById('m-ind-avance').value),
+      meta: parseFloat(document.getElementById('m-ind-meta').value),
+      puntos: parseFloat(document.getElementById('m-ind-puntos').value),
+      semaforo: document.getElementById('m-ind-semaforo').value,
+      responsable: document.getElementById('m-ind-responsable').value,
+      medios_verificacion: document.getElementById('m-ind-medios').value,
+      observaciones: document.getElementById('m-ind-obs').value,
+      drive_folder_url: document.getElementById('m-ind-drive-url').value
+    };
+
+    try {
+      const res = await safeFetchJson(`${API_BASE}/indicadores/${indId}`, {
+        method: 'PUT',
+        headers: getAuthHeaders(),
+        body: json_stringify(body)
+      });
+      if (res.ok) {
+        showToast(`Indicador ${indId} actualizado con éxito`, 'success');
+        closeModal('modal-indicador');
+        await loadIndicadores();
+        await loadDashboard();
+        await loadEncargados();
+      } else {
+        showToast('Error al actualizar indicador', 'error');
+      }
+    } catch (err) {
+      showToast('Error de conexión', 'error');
+    }
+  });
+
+  // 2. Submit Corte
+  document.getElementById('form-corte').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const body = {
+      indicador_id: document.getElementById('c-indicador').value,
+      corte_nombre: document.getElementById('c-nombre').value,
+      fecha: document.getElementById('c-fecha').value,
+      numerador: parseFloat(document.getElementById('c-num').value),
+      denominador: parseFloat(document.getElementById('c-den').value),
+      evaluador: document.getElementById('c-evaluador').value,
+      evidencia_url: document.getElementById('c-evidencia').value,
+      observaciones: document.getElementById('c-obs').value
+    };
+
+    try {
+      const res = await safeFetchJson(`${API_BASE}/cortes`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: json_stringify(body)
+      });
+      if (res.ok) {
+        showToast('Medición de corte registrada exitosamente', 'success');
+        closeModal('modal-corte');
+        document.getElementById('form-corte').reset();
+        await loadCortes();
+        await loadIndicadores();
+        await loadDashboard();
+      }
+    } catch (err) {
+      showToast('Error al registrar corte', 'error');
+    }
+  });
+
+  // 3. Submit Riesgo ISO
+  document.getElementById('form-riesgo').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const body = {
+      principio: document.getElementById('r-principio').value,
+      indicador_id: document.getElementById('r-indicador').value,
+      proceso_iso: document.getElementById('r-proceso').value,
+      factor_riesgo: document.getElementById('r-factor').value,
+      causa_raiz: document.getElementById('r-causa').value,
+      probabilidad: parseInt(document.getElementById('r-prob').value),
+      impacto: parseInt(document.getElementById('r-imp').value),
+      plan_mitigacion: document.getElementById('r-plan').value,
+      responsable: document.getElementById('r-responsable').value,
+      estado: document.getElementById('r-estado').value
+    };
+
+    try {
+      const res = await safeFetchJson(`${API_BASE}/riesgos`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: json_stringify(body)
+      });
+      if (res.ok) {
+        showToast('Riesgo ISO 9001 registrado exitosamente', 'success');
+        closeModal('modal-riesgo');
+        document.getElementById('form-riesgo').reset();
+        await loadRiesgos();
+        await loadDashboard();
+      }
+    } catch (err) {
+      showToast('Error al registrar riesgo', 'error');
+    }
+  });
+
+  // 4. Submit Hallazgo PHVA
+  document.getElementById('form-hallazgo').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const body = {
+      tipo: document.getElementById('h-tipo').value,
+      indicador_id: document.getElementById('h-indicador').value,
+      fase_phva: document.getElementById('h-fase').value,
+      descripcion: document.getElementById('h-desc').value,
+      causa_raiz: document.getElementById('h-causa').value,
+      accion_propuesta: document.getElementById('h-accion').value,
+      plazo_limite: document.getElementById('h-plazo').value,
+      responsable: document.getElementById('h-responsable').value,
+      estado: document.getElementById('h-estado').value,
+      eficacia_verificada: parseInt(document.getElementById('h-eficacia').value),
+      observaciones_cierre: document.getElementById('h-obs').value
+    };
+
+    try {
+      const res = await safeFetchJson(`${API_BASE}/hallazgos`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: json_stringify(body)
+      });
+      if (res.ok) {
+        showToast('Plan de Mejora registrado en ciclo PHVA', 'success');
+        closeModal('modal-hallazgo');
+        document.getElementById('form-hallazgo').reset();
+        await loadHallazgos();
+        await loadDashboard();
+      }
+    } catch (err) {
+      showToast('Error al registrar plan de mejora', 'error');
+    }
+  });
+
+  // 5. Submit Auditoría Clínica
+  document.getElementById('form-auditoria').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const body = {
+      indicador_id: document.getElementById('a-indicador').value,
+      sector: document.getElementById('a-sector').value,
+      fecha: document.getElementById('a-fecha').value,
+      paciente_rce_id: document.getElementById('a-rce').value,
+      criterios_evaluados: parseInt(document.getElementById('a-eval').value),
+      criterios_cumplidos: parseInt(document.getElementById('a-cum').value),
+      auditor: document.getElementById('a-auditor').value,
+      observaciones: document.getElementById('a-obs').value
+    };
+
+    try {
+      const res = await safeFetchJson(`${API_BASE}/auditorias`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: json_stringify(body)
+      });
+      if (res.ok) {
+        showToast('Auditoría clínica registrada con éxito', 'success');
+        closeModal('modal-auditoria');
+        document.getElementById('form-auditoria').reset();
+        await loadAuditorias();
+        await loadDashboard();
+      }
+    } catch (err) {
+      showToast('Error al registrar auditoría', 'error');
+    }
+  });
+}
+
+function json_stringify(obj) {
+  return JSON.stringify(obj);
+}
+
+// TOAST NOTIFICATIONS
+function showToast(message, type = 'info') {
+  const container = document.getElementById('toast-container');
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerHTML = `<span>${message}</span>`;
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(10px)';
+    setTimeout(() => toast.remove(), 300);
+  }, 4000);
+}
+
+
+// ============================================================================
+// SISTEMA PROFESIONAL DE AUTENTICACIÓN Y GESTIÓN DE USUARIOS (MAIS 2026)
+// Super Administrador: jefatura.tecnicadsm@gmail.com
+// ============================================================================
+
+function getAuthHeaders() {
+  const headers = { 'Content-Type': 'application/json' };
+  if (state.authToken) {
+    headers['Authorization'] = `Bearer ${state.authToken}`;
+  }
+  return headers;
+}
+
+// 1. INICIALIZACIÓN DE AUTENTICACIÓN
+async function initAuth() {
+  setupAuthEventListeners();
+  setupCreateUserModal();
+
+  if (state.authToken) {
+    try {
+      const res = await fetch(`${API_BASE}/auth/me`, {
+        headers: getAuthHeaders()
+      });
+      if (res.ok) {
+        const data = await res.json();
+        state.currentUser = data.user;
+        renderAuthUI();
+        if (state.currentUser.requiere_cambio_clave) {
+          openModal('modal-change-password');
+          const notice = document.getElementById('pw-change-notice');
+          if (notice) notice.style.display = 'block';
+        }
+        return;
+      } else {
+        localStorage.removeItem('mais_auth_token');
+        state.authToken = null;
+        state.currentUser = null;
+      }
+    } catch (e) {
+      console.warn('Servidor local de auth no disponible de inmediato:', e);
+    }
+  }
+  renderAuthUI();
+}
+
+// 2. RENDERIZACIÓN DE BARRA DE USUARIO
+function renderAuthUI() {
+  // CONTROL DE ACCESO ESTRICTO: SOLO ROL PROGRAMADOR & SUPER ADMIN ACCEDE A GOOGLE SHEETS
+  const btnSyncSheets = document.getElementById('btn-sync-sheets');
+  const btnOpenSheets = document.getElementById('btn-open-sheets');
+  const isSuperAdmin = state.currentUser && state.currentUser.rol === 'super_admin';
+
+  if (btnSyncSheets) btnSyncSheets.style.display = isSuperAdmin ? 'inline-flex' : 'none';
+  if (btnOpenSheets) btnOpenSheets.style.display = isSuperAdmin ? 'inline-flex' : 'none';
+
+
+  const guestView = document.getElementById('auth-guest-view');
+  const loggedView = document.getElementById('auth-logged-view');
+  const usersTabNav = document.getElementById('tab-nav-usuarios');
+
+  if (state.currentUser) {
+    if (guestView) guestView.style.display = 'none';
+    if (loggedView) loggedView.style.display = 'flex';
+
+    const avatar = document.getElementById('user-avatar-chip');
+    const nameEl = document.getElementById('user-display-name');
+    const roleEl = document.getElementById('user-display-role');
+
+    if (avatar) {
+      avatar.textContent = state.currentUser.rol === 'super_admin' ? '👑' : (state.currentUser.nombre_completo ? state.currentUser.nombre_completo.substring(0, 2).toUpperCase() : 'US');
+    }
+    if (nameEl) {
+      nameEl.textContent = state.currentUser.nombre_completo || state.currentUser.email;
+    }
+    if (roleEl) {
+      if (state.currentUser.rol === 'super_admin') {
+        roleEl.textContent = 'Programador & Super Admin';
+        roleEl.style.color = '#38bdf8';
+      } else {
+        roleEl.textContent = state.currentUser.cargo || 'Encargado(a) MAIS';
+        roleEl.style.color = '#94a3b8';
+      }
+    }
+
+    if (usersTabNav) {
+      usersTabNav.style.display = state.currentUser.rol === 'super_admin' ? 'inline-flex' : 'none';
+    }
+  } else {
+    if (guestView) guestView.style.display = 'flex';
+    if (loggedView) loggedView.style.display = 'none';
+    if (usersTabNav) usersTabNav.style.display = 'none';
+
+    if (state.activeTab === 'tab-usuarios') {
+      switchTab('tab-dashboard');
+    }
+  }
+}
+
+// 3. LISTENERS DE AUTENTICACIÓN
+function setupAuthEventListeners() {
+  const btnOpenLogin = document.getElementById('btn-open-login');
+  const btnCloseLogin = document.getElementById('btn-close-modal-login');
+  const btnLogout = document.getElementById('btn-logout');
+  const btnUserChangePw = document.getElementById('btn-user-change-pw');
+  const btnClosePw = document.getElementById('btn-close-modal-pw');
+  const btnCancelPw = document.getElementById('btn-cancel-modal-pw');
+  const btnTogglePw = document.getElementById('btn-toggle-login-pw');
+
+  if (btnOpenLogin) btnOpenLogin.addEventListener('click', () => openModal('modal-login'));
+  if (btnCloseLogin) btnCloseLogin.addEventListener('click', () => closeModal('modal-login'));
+
+  if (btnLogout) {
+    btnLogout.addEventListener('click', async () => {
+      try {
+        await fetch(`${API_BASE}/auth/logout`, { method: 'POST', headers: getAuthHeaders() });
+      } catch (e) {}
+      localStorage.removeItem('mais_auth_token');
+      state.authToken = null;
+      state.currentUser = null;
+      renderAuthUI();
+      showToast('Sesión cerrada correctamente.', 'info');
+    });
+  }
+
+  if (btnUserChangePw) {
+    btnUserChangePw.addEventListener('click', () => {
+      openModal('modal-change-password');
+      const notice = document.getElementById('pw-change-notice');
+      if (notice) notice.style.display = 'none';
+    });
+  }
+
+  if (btnClosePw) btnClosePw.addEventListener('click', () => closeModal('modal-change-password'));
+  if (btnCancelPw) btnCancelPw.addEventListener('click', () => closeModal('modal-change-password'));
+
+  if (btnTogglePw) {
+    btnTogglePw.addEventListener('click', () => {
+      const pwInput = document.getElementById('login-password');
+      if (!pwInput) return;
+      if (pwInput.type === 'password') {
+        pwInput.type = 'text';
+        btnTogglePw.style.color = '#2563eb';
+      } else {
+        pwInput.type = 'password';
+        btnTogglePw.style.color = '#94a3b8';
+      }
+    });
+  }
+
+  // Submit Login
+  const formLogin = document.getElementById('form-login');
+  if (formLogin) {
+    formLogin.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+      const alertEl = document.getElementById('login-error-alert');
+      const btnSubmit = document.getElementById('btn-submit-login');
+
+      if (alertEl) alertEl.style.display = 'none';
+      if (btnSubmit) {
+        btnSubmit.disabled = true;
+        btnSubmit.innerHTML = '<span>Verificando credenciales...</span>';
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+        if (res.ok && data.token) {
+          state.authToken = data.token;
+          state.currentUser = data.user;
+          localStorage.setItem('mais_auth_token', data.token);
+          closeModal('modal-login');
+          formLogin.reset();
+          renderAuthUI();
+          showToast(`¡Bienvenido(a), ${data.user.nombre_completo}!`, 'success');
+
+          if (data.user.requiere_cambio_clave) {
+            setTimeout(() => {
+              openModal('modal-change-password');
+              const notice = document.getElementById('pw-change-notice');
+              if (notice) notice.style.display = 'block';
+            }, 400);
+          }
+
+          if (state.currentUser.rol === 'super_admin' && state.activeTab === 'tab-usuarios') {
+            loadUsersTable();
+          }
+        } else {
+          if (alertEl) {
+            alertEl.textContent = data.error || 'Credenciales inválidas. Revisa correo y contraseña.';
+            alertEl.style.display = 'block';
+          }
+        }
+      } catch (err) {
+        if (alertEl) {
+          alertEl.textContent = 'Error de conexión con el servicio de autenticación.';
+          alertEl.style.display = 'block';
+        }
+      } finally {
+        if (btnSubmit) {
+          btnSubmit.disabled = false;
+          btnSubmit.innerHTML = '<span>Iniciar Sesión</span>';
+        }
+      }
+    });
+  }
+
+  // Submit Change Password
+  const formPw = document.getElementById('form-change-password');
+  if (formPw) {
+    formPw.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const current_password = document.getElementById('pw-current').value;
+      const new_password = document.getElementById('pw-new').value;
+      const confirm_password = document.getElementById('pw-confirm').value;
+
+      if (new_password !== confirm_password) {
+        showToast('La nueva contraseña y su confirmación no coinciden.', 'warning');
+        return;
+      }
+      if (new_password.length < 6) {
+        showToast('La nueva contraseña debe tener mínimo 6 caracteres.', 'warning');
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/auth/change-password`, {
+          method: 'POST',
+          headers: getAuthHeaders(),
+          body: JSON.stringify({ current_password, new_password })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          showToast('¡Contraseña actualizada con éxito!', 'success');
+          if (state.currentUser) state.currentUser.requiere_cambio_clave = false;
+          closeModal('modal-change-password');
+          formPw.reset();
+          if (state.activeTab === 'tab-usuarios') loadUsersTable();
+        } else {
+          showToast(data.error || 'Error al cambiar contraseña.', 'error');
+        }
+      } catch (err) {
+        showToast('Error de conexión al cambiar contraseña.', 'error');
+      }
+    });
+  }
+}
+
+// 4. ACCESO RÁPIDO PARA PRUEBAS (EXPUESTO GLOBALMENTE)
+window.quickFillLogin = function(email, password) {
+  const emailInput = document.getElementById('login-email');
+  const pwInput = document.getElementById('login-password');
+  if (emailInput && pwInput) {
+    emailInput.value = email;
+    pwInput.value = password;
+    emailInput.focus();
+    const alertEl = document.getElementById('login-error-alert');
+    if (alertEl) alertEl.style.display = 'none';
+  }
+};
+
+// 5. CONTROL DE PERMISOS EN DETALLE DE INDICADOR
+function checkIndicadorPermissions(ind) {
+  const saveBtn = document.querySelector('#form-indicador button[type="submit"]');
+  let notice = document.getElementById('m-ind-permission-notice');
+
+  // Si no existe el banner en el modal, lo creamos dinámicamente arriba del formulario
+  if (!notice) {
+    const modalBody = document.querySelector('#modal-indicador .modal-body');
+    if (modalBody) {
+      notice = document.createElement('div');
+      notice.id = 'm-ind-permission-notice';
+      notice.style.marginBottom = '1rem';
+      notice.style.padding = '0.75rem 1rem';
+      notice.style.borderRadius = 'var(--radius-md)';
+      notice.style.fontSize = '0.85rem';
+      notice.style.lineHeight = '1.4';
+      modalBody.insertBefore(notice, modalBody.firstChild);
+    }
+  }
+
+  // Lista de campos editables en el formulario del modal
+  const formFieldIds = [
+    'm-ind-avance', 'm-ind-meta', 'm-ind-puntos', 'm-ind-semaforo',
+    'm-ind-responsable', 'm-ind-fuente', 'm-ind-medios', 'm-ind-obs', 'm-ind-drive-url'
+  ];
+
+  let canEdit = false;
+  let permMsg = '';
+
+  if (!state.currentUser) {
+    canEdit = false;
+    permMsg = `
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+        <div>
+          🔒 <strong>Modo Solo Lectura (Sin Sesión):</strong> Debes iniciar sesión con tu cuenta institucional en <strong>"🔐 Acceso Funcionarios"</strong> para poder editar avances, semáforos o medios de verificación.
+        </div>
+        <button type="button" class="btn btn-primary" onclick="closeModal('modal-indicador'); openModal('modal-login');" style="font-size: 0.75rem; padding: 5px 12px; background: #1e3a8a; border: none; white-space: nowrap; cursor: pointer;">
+          🔐 Iniciar Sesión para Editar
+        </button>
+      </div>
+    `;
+    if (notice) {
+      notice.style.background = '#f1f5f9';
+      notice.style.border = '1px solid #cbd5e1';
+      notice.style.color = '#334155';
+    }
+  } else if (state.currentUser.rol === 'super_admin') {
+    canEdit = true;
+    permMsg = '👑 <strong>Permiso Total Autorizado:</strong> Programador & Super Administrador. Tienes control pleno sobre los 38 indicadores y respaldos normativos.';
+    if (notice) {
+      notice.style.background = '#f0fdf4';
+      notice.style.border = '1px solid #86efac';
+      notice.style.color = '#15803d';
+    }
+  } else {
+    // Encargado de Eje: verificación rigurosa de pertenencia por palabras clave
+    const userText = ((state.currentUser.eje_responsable || '') + ' ' + (state.currentUser.cargo || '')).toLowerCase();
+    const indText = ((ind.responsable || '') + ' ' + (ind.nombre_corto || '')).toLowerCase();
+
+    const keywords = ['direccion', 'gestor', 'calidad', 'ecicep', 'participacion', 'intercultural', 'some', 'agenda', 'promocion', 'sector', 'rrhh', 'capacitacion', 'estadistica', 'prevencion', 'urgencia', 'psicosocial', 'salud mental'];
+    const matched = keywords.some(k => userText.includes(k) && indText.includes(k));
+
+    if (matched) {
+      canEdit = true;
+      permMsg = `✅ <strong>Eje Asignado:</strong> Editando activamente como <strong>${escapeHtml(state.currentUser.cargo)}</strong> (${escapeHtml(state.currentUser.nombre_completo)}).`;
+      if (notice) {
+        notice.style.background = '#f0fdf4';
+        notice.style.border = '1px solid #86efac';
+        notice.style.color = '#15803d';
+      }
+    } else {
+      canEdit = false;
+      permMsg = `ℹ️ <strong>Solo Lectura (Eje no asignado):</strong> Tu perfil está asignado al eje <em>"${escapeHtml(state.currentUser.eje_responsable)}"</em>. Este indicador corresponde al responsable <em>"${escapeHtml(ind.responsable)}"</em>.`;
+      if (notice) {
+        notice.style.background = '#fefce8';
+        notice.style.border = '1px solid #fde047';
+        notice.style.color = '#854d0e';
+      }
+    }
+  }
+
+  if (notice) {
+    notice.innerHTML = permMsg;
+    notice.style.display = 'block';
+  }
+
+  // Habilitar o deshabilitar inputs del formulario según permisos reales
+  formFieldIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.disabled = !canEdit;
+      el.readOnly = !canEdit;
+      if (!canEdit) {
+        el.style.backgroundColor = '#f8fafc';
+        el.style.cursor = 'not-allowed';
+      } else {
+        el.style.backgroundColor = '#ffffff';
+        el.style.cursor = 'text';
+      }
+    }
+  });
+
+  // Control estricto del botón de guardar
+  if (saveBtn) {
+    saveBtn.disabled = !canEdit;
+    saveBtn.style.opacity = canEdit ? '1' : '0.4';
+    saveBtn.style.cursor = canEdit ? 'pointer' : 'not-allowed';
+    saveBtn.title = canEdit ? 'Guardar Cambios' : 'Debes iniciar sesión con los permisos respectivos para editar';
+  }
+}
+
+// 6. GESTIÓN DE USUARIOS (SUPER ADMINISTRADOR)
+async function loadUsersTable() {
+  if (!state.currentUser || state.currentUser.rol !== 'super_admin') return;
+
+  const tbody = document.getElementById('users-table-body') || document.getElementById('tbody-users');
+  if (!tbody) return;
+
+  tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 2rem; color: #94a3b8;">Cargando perfiles institucionales...</td></tr>';
+
+  try {
+    const res = await fetch(`${API_BASE}/users`, { headers: getAuthHeaders() });
+    const data = await res.json();
+    state.users = data;
+
+    // Actualizar tarjetas de conteo
+    const totalUsers = data.length;
+    const adminUsers = data.filter(u => u.rol === 'super_admin').length;
+    const encargadosUsers = data.filter(u => u.rol === 'encargado_eje').length;
+    const pendingPwUsers = data.filter(u => u.requiere_cambio_clave).length;
+
+    const elTotal = document.getElementById('stat-total-users') || document.getElementById('kpi-users-total');
+    const elAdmin = document.getElementById('stat-admin-users') || document.getElementById('kpi-users-admin');
+    const elEnc = document.getElementById('stat-encargados-users') || document.getElementById('kpi-users-encargados');
+    const elPending = document.getElementById('stat-pending-users') || document.getElementById('kpi-users-temp');
+
+    if (elTotal) elTotal.textContent = totalUsers;
+    if (elAdmin) elAdmin.textContent = adminUsers;
+    if (elEnc) elEnc.textContent = encargadosUsers;
+    if (elPending) elPending.textContent = pendingPwUsers;
+
+    tbody.innerHTML = '';
+    data.forEach(u => {
+      const tr = document.createElement('tr');
+      const isSuper = u.rol === 'super_admin';
+      const roleBadge = isSuper 
+        ? '<span class="user-role-badge role-super_admin">👑 Super Admin & Programador</span>'
+        : '<span class="user-role-badge role-encargado_eje">🩺 Encargado(a) de Eje</span>';
+      
+      const claveBadge = u.requiere_cambio_clave 
+        ? `<span class="status-pill status-rojo" title="Clave temporal: ${u.clave_temporal || 'Mais2026!Cholchol'}">Temporal (${escapeHtml(u.clave_temporal || 'Pendiente')})</span>`
+        : '<span class="status-pill status-verde">Actualizada por Usuario</span>';
+
+      const statusBadge = u.activo
+        ? '<span class="status-pill status-verde">Activo</span>'
+        : '<span class="status-pill status-rojo">Inactivo</span>';
+
+      tr.innerHTML = `
+        <td>
+          <div style="font-weight: 600; color: #0f172a;">${escapeHtml(u.nombre_completo)}</div>
+          <div style="font-size: 0.75rem; color: #64748b;">${escapeHtml(u.cargo)}</div>
+        </td>
+        <td>
+          <code style="font-size: 0.82rem; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; color: #1e293b;">${escapeHtml(u.email)}</code>
+        </td>
+        <td>${roleBadge}</td>
+        <td><small style="font-weight: 500;">${escapeHtml(u.eje_responsable || 'Todos los Ejes')}</small></td>
+        <td>${claveBadge}</td>
+        <td>
+          <div style="display: flex; gap: 6px; align-items: center;">
+            <button class="btn btn-outline" style="padding: 4px 8px; font-size: 0.75rem;" onclick="resetUserPassword(${u.id}, '${escapeHtml(u.nombre_completo)}')" title="Restablecer clave temporal">
+              🔑 Reset
+            </button>
+            ${!isSuper ? `
+              <button class="btn btn-outline" style="padding: 4px 8px; font-size: 0.75rem; color: ${u.activo ? '#dc2626' : '#16a34a'};" onclick="toggleUserStatus(${u.id}, ${u.activo ? 0 : 1})">
+                ${u.activo ? 'Desactivar' : 'Activar'}
+              </button>
+            ` : '<span style="font-size: 0.75rem; color: #94a3b8;">Protegido</span>'}
+          </div>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  } catch (err) {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #dc2626; padding: 2rem;">Error al cargar lista de usuarios.</td></tr>';
+  }
+}
+
+// 7. RESTABLECER CONTRASEÑA DE ENCARGADO
+window.resetUserPassword = async function(userId, userName) {
+  const tempPass = prompt(`Ingresa la nueva contraseña temporal para ${userName}:`, 'Mais2026!Cholchol');
+  if (!tempPass) return;
+
+  try {
+    const res = await fetch(`${API_BASE}/users/${userId}/reset`, {
+      method: 'PUT',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({ clave_temporal: tempPass, temp_password: tempPass })
+    });
+    const data = await res.json();
+    if (res.ok) {
+      showToast(`Clave temporal para ${userName} restablecida a: ${tempPass}`, 'success');
+      loadUsersTable();
+    } else {
+      showToast(data.error || 'Error al restablecer contraseña.', 'error');
+    }
+  } catch (e) {
+    showToast('Error de red al restablecer contraseña.', 'error');
+  }
+};
+
+// 8. ACTIVAR / DESACTIVAR USUARIO
+window.toggleUserStatus = async function(userId, newStatus) {
+  try {
+    const res = await fetch(`${API_BASE}/users/${userId}/status`, {
+      method: 'PUT',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({ activo: newStatus })
+    });
+    const data = await res.json();
+    if (res.ok) {
+      showToast(`Estado de usuario actualizado: ${newStatus ? 'Activo' : 'Inactivo'}`, 'info');
+      loadUsersTable();
+    } else {
+      showToast(data.error || 'Error al actualizar estado.', 'error');
+    }
+  } catch (e) {
+    showToast('Error de red al actualizar estado.', 'error');
+  }
+};
+
+// 9. MODAL CREAR USUARIO
+function setupCreateUserModal() {
+  const btnOpen = document.getElementById('btn-open-create-user') || document.getElementById('btn-create-user-modal');
+  const btnClose = document.getElementById('btn-close-modal-create-user');
+  const btnCancel = document.getElementById('btn-cancel-modal-create-user');
+  const btnExport = document.getElementById('btn-export-users-csv');
+  const form = document.getElementById('form-create-user');
+
+  if (btnOpen) btnOpen.addEventListener('click', () => openModal('modal-create-user'));
+  if (btnClose) btnClose.addEventListener('click', () => closeModal('modal-create-user'));
+  if (btnCancel) btnCancel.addEventListener('click', () => closeModal('modal-create-user'));
+  if (btnExport) btnExport.addEventListener('click', exportUsersCSV);
+
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const body = {
+        nombre_completo: document.getElementById('u-nombre').value.trim(),
+        email: document.getElementById('u-email').value.trim(),
+        cargo: document.getElementById('u-cargo').value.trim(),
+        rol: document.getElementById('u-rol').value,
+        eje_responsable: document.getElementById('u-eje').value.trim(),
+        clave_temporal: document.getElementById('u-clave-temp').value.trim()
+      };
+
+      try {
+        const res = await fetch(`${API_BASE}/users`, {
+          method: 'POST',
+          headers: getAuthHeaders(),
+          body: JSON.stringify(body)
+        });
+        const data = await res.json();
+        if (res.ok) {
+          showToast(`Usuario ${body.nombre_completo} creado con éxito`, 'success');
+          closeModal('modal-create-user');
+          form.reset();
+          loadUsersTable();
+        } else {
+          showToast(data.error || 'Error al crear usuario.', 'error');
+        }
+      } catch (err) {
+        showToast('Error de conexión al crear usuario.', 'error');
+      }
+    });
+  }
+}
+
+// 10. EXPORTAR USUARIOS A CSV
+function exportUsersCSV() {
+  if (!state.users || state.users.length === 0) {
+    showToast('No hay usuarios cargados para exportar.', 'warning');
+    return;
+  }
+  const headers = ['ID', 'Nombre Completo', 'Email', 'Cargo', 'Rol', 'Eje Responsable', 'Clave Temporal Inicial', 'Requiere Cambio Clave', 'Activo', 'Ultimo Acceso'];
+  const rows = state.users.map(u => [
+    u.id,
+    `"${(u.nombre_completo || '').replace(/"/g, '""')}"`,
+    `"${u.email}"`,
+    `"${(u.cargo || '').replace(/"/g, '""')}"`,
+    u.rol,
+    `"${(u.eje_responsable || '').replace(/"/g, '""')}"`,
+    `"${u.clave_temporal || ''}"`,
+    u.requiere_cambio_clave ? 'SI' : 'NO',
+    u.activo ? 'ACTIVO' : 'INACTIVO',
+    `"${u.ultimo_acceso || 'Nunca'}"`
+  ]);
+
+  const csvContent = '\uFEFF' + [headers.join(','), ...rows.map(r => r.join(','))].join('\r\n');
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `Usuarios_MAIS_2026_Cholchol_${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('Planilla de usuarios exportada en CSV con éxito', 'success');
+}
+
+</script>
+</body>
+</html>

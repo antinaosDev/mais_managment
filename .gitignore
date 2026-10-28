@@ -1,0 +1,54 @@
+# ==============================================================================
+# GIT GUARDIAN - PROTECCIÓN Y BLINDAJE INSTITUCIONAL DE DATOS
+# ==============================================================================
+
+# Bases de datos y almacenamiento local
+*.sqlite
+*.sqlite3
+*.db
+mais_database.sqlite
+
+# Documentos clínicos, actas y oficios con potencial PII
+*.docx
+*.doc
+*.pdf
+*.xlsx
+*.xls
+*.csv
+archivos_mais/
+docs_tecnicos/
+evaluacion_2026_docx/
+evaluacion_2026_raw.html
+
+# Archivos de datos, catálogos y esquemas (los datos deben cargarse exclusivamente desde Google Sheets)
+*.json
+catalogo_indicadores_mais.json
+evaluacion_oficial_2026_minsal.json
+
+# Documentación interna y archivos informativos
+README.md
+README_EN_LINEA.md
+
+# Integraciones de backend y Apps Script (código privado de servidor)
+apps_script/
+auth.py
+server.py
+db.py
+sync_sheets.py
+apply_*.py
+fix_*.py
+inject_*.py
+update_*.py
+build_*.py
+iniciar_app_mais.sh
+
+# Versiones locales y modulares (se publica exclusivamente index.html autónomo)
+public/
+sistema_mais_cholchol_portable.html
+
+# Python y temporales
+__pycache__/
+*.py[cod]
+*$py.class
+*.log
+.DS_Store
