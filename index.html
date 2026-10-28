@@ -1742,30 +1742,17 @@ body {
   </script>
 </head>
 <body>
-
-<div id="portable-cloud-bar" style="background: linear-gradient(135deg, #1e293b, #0f172a); color: white; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; font-size: 13px; border-bottom: 2px solid #3b82f6; z-index: 9999;">
-  <div style="display: flex; align-items: center; gap: 10px;">
-    <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e;"></span>
-    <strong>Modo Portable Multiequipo:</strong> Conectado en la nube con Google Sheets (CESFAM Cholchol)
-  </div>
-  <div style="display: flex; align-items: center; gap: 8px;">
-    <label for="cloud-api-url" style="color: #94a3b8; font-size: 12px;">Enlace Web App Google:</label>
-    <input type="text" id="cloud-api-url" placeholder="https://script.google.com/macros/s/.../exec" style="padding: 4px 8px; border-radius: 4px; border: 1px solid #475569; background: #0f172a; color: white; width: 320px; font-size: 11px;">
-    <button onclick="saveCloudUrl()" style="background: #2563eb; color: white; border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: 600;">Guardar Enlace</button>
-  </div>
-</div>
-
   <div class="app-container">
     <!-- TOP HEADER -->
     <header class="app-header">
       <div class="header-left">
         <div class="brand-badge">
           <span class="pulse-dot"></span>
-          <span>DSSAS · MAIS 2026</span>
+          <span>MAIS 2026</span>
         </div>
         <div class="header-title-block">
           <h1>Sistema de Certificación y Monitoreo MAIS</h1>
-          <p class="subtitle"><strong>CESFAM Cholchol</strong> · Departamento de Salud Municipal Cholchol · Dirección de Servicio de Salud Araucanía Sur (DSSAS)</p>
+          <p class="subtitle"><strong>CESFAM Cholchol</strong> · Departamento de Salud Municipal Cholchol</p>
         </div>
       </div>
       <div class="header-actions">
@@ -1779,12 +1766,12 @@ body {
           <span>Abrir Planilla Google</span>
         </a>
 
-        <!-- BOTONES DISPONIBLES PARA TODOS LOS PERFILES: CSV Y REPORTE PDF -->
-        <button id="btn-export-csv" class="btn btn-outline" style="border-color: #22c55e; color: #15803d; background: #ffffff;" title="Descargar base consolidada en archivo CSV">
+        <!-- BOTONES DISPONIBLES TRAS INICIAR SESIÓN: CSV Y REPORTE PDF -->
+        <button id="btn-export-csv" class="btn btn-outline" style="display: none; border-color: #22c55e; color: #15803d; background: #ffffff;" title="Descargar base consolidada en archivo CSV">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
           <span>Descargar CSV</span>
         </button>
-        <button id="btn-export-pdf" onclick="window.printReport()" class="btn btn-outline" style="border-color: #0284c7; color: #0369a1; background: #ffffff;" title="Generar e Imprimir Informe Oficial de Certificación en PDF">
+        <button id="btn-export-pdf" onclick="window.printReport()" class="btn btn-outline" style="display: none; border-color: #0284c7; color: #0369a1; background: #ffffff;" title="Generar e Imprimir Informe Oficial de Certificación en PDF">
           <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
           <span>Informe PDF</span>
         </button>
@@ -1813,6 +1800,39 @@ body {
       </div>
     </header>
 
+    <!-- PANTALLA DE ACCESO OBLIGATORIO (LOGIN GATEKEEPER): VISIBLE SI NO HAY SESIÓN -->
+    <div id="app-login-gate" style="display: flex; justify-content: center; align-items: center; min-height: 65vh; padding: 40px 20px;">
+      <div style="background: white; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04); border: 1px solid #e2e8f0; width: 100%; max-width: 440px; padding: 40px 32px; text-align: center;">
+        <div style="width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #eff6ff, #dbeafe); color: #1d4ed8; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(29, 78, 216, 0.15);">
+          <svg style="width: 32px; height: 32px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h2 style="font-size: 22px; font-weight: 700; color: #1e3a8a; margin: 0 0 8px 0;">Acceso a Funcionarios</h2>
+        <p style="font-size: 13px; color: #64748b; margin: 0 0 28px 0;">CESFAM Cholchol · Departamento de Salud Municipal Cholchol</p>
+
+        <div id="gate-error-alert" style="display: none; background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; padding: 12px 14px; border-radius: 10px; font-size: 13px; margin-bottom: 20px; text-align: left; line-height: 1.4;"></div>
+
+        <form id="form-gate-login" style="text-align: left; display: flex; flex-direction: column; gap: 18px;">
+          <div>
+            <label for="gate-email" style="display: block; font-size: 13px; font-weight: 600; color: #334155; margin-bottom: 6px;">Correo Electrónico Institucional</label>
+            <input type="email" id="gate-email" required placeholder="nombre@cholchol.cl o correo oficial" style="width: 100%; box-sizing: border-box; padding: 12px 14px; border-radius: 10px; border: 1px solid #cbd5e1; font-size: 14px; outline: none; transition: border-color 0.2s;">
+          </div>
+          <div>
+            <label for="gate-password" style="display: block; font-size: 13px; font-weight: 600; color: #334155; margin-bottom: 6px;">Contraseña</label>
+            <input type="password" id="gate-password" required placeholder="••••••••••••" style="width: 100%; box-sizing: border-box; padding: 12px 14px; border-radius: 10px; border: 1px solid #cbd5e1; font-size: 14px; outline: none; transition: border-color 0.2s;">
+          </div>
+          <button type="submit" id="btn-submit-gate" style="width: 100%; background: linear-gradient(135deg, #1e3a8a, #0284c7); color: white; border: none; padding: 13px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 10px rgba(2, 132, 199, 0.3); margin-top: 4px;">
+            <span>Iniciar Sesión en el Sistema</span>
+          </button>
+        </form>
+        
+        <div style="margin-top: 28px; padding-top: 18px; border-top: 1px solid #f1f5f9; font-size: 12px; color: #94a3b8; line-height: 1.4;">
+          🔒 Plataforma privada de uso exclusivo para funcionarios y referentes de eje MAIS del CESFAM Cholchol.
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENEDOR PRINCIPAL AUTENTICADO (OCULTO HASTA INICIAR SESIÓN) -->
+    <div id="app-authenticated-content" style="display: none;">
     <!-- MAIN NAVIGATION TABS -->
     <nav class="nav-tabs" role="tablist">
       <button class="tab-btn active" data-tab="tab-dashboard" role="tab" id="tab-nav-dashboard">
@@ -2414,13 +2434,13 @@ body {
 
     <!-- FOOTER -->
     <footer class="app-footer">
-      <p>Sistema Integral de Seguimiento y Monitoreo MAIS 2026 · Departamento de Salud Municipal Cholchol · Dirección de Servicio de Salud Araucanía Sur (DSSAS)</p>
+      <p>Sistema Integral de Seguimiento y Monitoreo MAIS 2026 · CESFAM Cholchol · Departamento de Salud Municipal Cholchol</p>
       <div class="footer-meta">
-        <span>Sincronizado con Google Sheets API</span> · 
-        <span>SQLite Database Local</span> · 
-        <span>ISO 9001:2015 Compliant</span>
+        <span>Sincronizado con Google Sheets</span> · 
+        <span>Gestión de Calidad ISO 9001:2015</span>
       </div>
     </footer>
+    </div> <!-- /app-authenticated-content -->
   </div>
 
   <!-- MODAL: EDITAR / DETALLE INDICADOR -->
@@ -2988,41 +3008,43 @@ body {
   <script>
 
 // ============================================================================
-// CONEXIÓN UNIVERSAL EN LA NUBE PARA CUALQUIER COMPUTADOR (PORTABLE HTML)
+// CONEXIÓN UNIVERSAL EN LA NUBE CON GOOGLE APPS SCRIPT (GITHUB PAGES & NUBE)
 // ============================================================================
-const DEFAULT_APPS_SCRIPT_URL = localStorage.getItem('MAIS_CLOUD_URL') || 'https://script.google.com/macros/s/AKfycbyiE26SMtAC_l2zwEsx6-mojMf6yQgJvtd5ST70k5FGjSX2fUceZSIv5YCE48s63cPJ/exec';
+const DEFAULT_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyiE26SMtAC_l2zwEsx6-mojMf6yQgJvtd5ST70k5FGjSX2fUceZSIv5YCE48s63cPJ/exec';
 
-function saveCloudUrl() {
-  const input = document.getElementById('cloud-api-url');
-  if (input && input.value.trim()) {
-    localStorage.setItem('MAIS_CLOUD_URL', input.value.trim());
-    alert('¡Enlace en la nube de Google Sheets guardado con éxito! Recargando datos...');
-    location.reload();
-  }
-}
+// Interceptor transparente de fetch para operar contra la nube de Google Sheets
+if (window.location.protocol === 'file:' || !window.location.host.includes('localhost')) {
+  const _realFetch = window.fetch;
+  window.fetch = async function(url, options = {}) {
+    const urlStr = String(url);
+    if (!urlStr.startsWith('/api') && !urlStr.startsWith('api') && !urlStr.includes('/api/')) {
+      return _realFetch.apply(this, arguments);
+    }
 
-window.addEventListener('DOMContentLoaded', () => {
-  const input = document.getElementById('cloud-api-url');
-  if (input && DEFAULT_APPS_SCRIPT_URL) {
-    input.value = DEFAULT_APPS_SCRIPT_URL;
-  }
-});
+    const cleanUrl = urlStr.replace(/^.*\/?api\//, '');
+    const method = (options.method || 'GET').toUpperCase();
+    const cloudUrl = DEFAULT_APPS_SCRIPT_URL;
 
-async function safeFetchJson(url, options = {}) {
-  const cloudUrl = localStorage.getItem('MAIS_CLOUD_URL') || DEFAULT_APPS_SCRIPT_URL;
-  
-  // 1. Si tenemos configurada la URL de Google Apps Script y no estamos en servidor local
-  if (cloudUrl && (window.location.protocol === 'file:' || !window.location.host.includes('localhost'))) {
-    const cleanUrl = url.replace('/api/', '');
-    
-    if (options.method === 'PUT' || options.method === 'POST') {
-      const body = JSON.parse(options.body || '{}');
+    let body = {};
+    if (options.body) {
+      try {
+        body = typeof options.body === 'string' ? JSON.parse(options.body) : options.body;
+      } catch (e) {
+        body = {};
+      }
+    }
+
+    if (method === 'POST' || method === 'PUT') {
       let payload = { action: 'update_indicador', ...body };
       if (cleanUrl.startsWith('auth/login')) {
         payload = { action: 'login', email: body.email, password: body.password };
       } else if (cleanUrl.startsWith('auth/change-password')) {
         const u = JSON.parse(localStorage.getItem('mais_gas_user') || '{}');
         payload = { action: 'change_password', email: u.email, new_password: body.new_password };
+      } else if (cleanUrl.startsWith('auth/logout')) {
+        localStorage.removeItem('mais_gas_user');
+        localStorage.removeItem('mais_auth_token');
+        return { ok: true, status: 200, json: async () => ({ status: 'success' }) };
       } else {
         payload = {
           action: 'update_indicador',
@@ -3035,44 +3057,62 @@ async function safeFetchJson(url, options = {}) {
           observaciones: body.observaciones
         };
       }
-      const res = await fetch(cloudUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(payload)
-      });
-      const data = await res.json();
-      if (cleanUrl.startsWith('auth/login')) {
-        if (data.success) {
-          localStorage.setItem('mais_gas_user', JSON.stringify(data.user));
-          localStorage.setItem('mais_auth_token', data.token);
-          return { ok: true, status: 200, json: async () => ({ status: 'success', token: data.token, user: data.user }) };
-        } else {
-          return { ok: false, status: 401, json: async () => ({ status: 'error', error: data.error }) };
+
+      try {
+        const res = await _realFetch(cloudUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (cleanUrl.startsWith('auth/login')) {
+          if (data.success) {
+            localStorage.setItem('mais_gas_user', JSON.stringify(data.user));
+            localStorage.setItem('mais_auth_token', data.token);
+            return { ok: true, status: 200, json: async () => ({ status: 'success', token: data.token, user: data.user }) };
+          } else {
+            return { ok: false, status: 401, json: async () => ({ status: 'error', error: data.error }) };
+          }
         }
+        return { ok: true, status: 200, json: async () => data };
+      } catch (err) {
+        return { ok: false, status: 500, json: async () => ({ status: 'error', error: String(err) }) };
       }
-      return data;
     } else {
       // GET requests via ?api=...
+      if (cleanUrl.startsWith('auth/me')) {
+        const stored = localStorage.getItem('mais_gas_user');
+        if (stored) {
+          try {
+            const u = JSON.parse(stored);
+            return { ok: true, status: 200, json: async () => ({ status: 'success', user: u }) };
+          } catch(e) {}
+        }
+        return { ok: false, status: 401, json: async () => ({ status: 'error', message: 'No hay sesión' }) };
+      }
+
       const endpoint = cleanUrl.split('?')[0].split('/')[0];
       const subId = cleanUrl.includes('/') ? cleanUrl.split('/')[1].split('?')[0] : null;
       const targetUrl = cloudUrl + (cloudUrl.includes('?') ? '&' : '?') + 'api=' + endpoint;
-      const res = await fetch(targetUrl);
-      const data = await res.json();
-      if (subId && Array.isArray(data)) {
-        return data.find(x => x.id === subId || x.codigo === subId) || data[0];
-      }
-      return data;
-    }
-  }
 
-  // 2. Fallback normal al servidor local (si corre en este PC o en red local)
-  try {
-    const res = await fetch(url, options);
-    return await res.json();
-  } catch (err) {
-    console.warn('Conexión local no disponible, intentando Google Sheets...', err);
-    throw err;
-  }
+      try {
+        const res = await _realFetch(targetUrl);
+        const data = await res.json();
+        if (subId && Array.isArray(data)) {
+          const found = data.find(x => String(x.id) === String(subId) || String(x.codigo) === String(subId)) || data[0];
+          return { ok: true, status: 200, json: async () => found };
+        }
+        return { ok: true, status: 200, json: async () => data };
+      } catch (err) {
+        return { ok: false, status: 500, json: async () => ({ status: 'error', error: String(err) }) };
+      }
+    }
+  };
+}
+
+async function safeFetchJson(url, options = {}) {
+  const res = await fetch(url, options);
+  return res.json ? (await res.json()) : res;
 }
 
 
@@ -3120,11 +3160,13 @@ const state = {
 };
 
 // DOM Content Loaded
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   initTabs();
   initEventListeners();
-  initAuth();
-  loadAllData();
+  await initAuth();
+  if (state.currentUser) {
+    loadAllData();
+  }
 });
 
 // INITIALIZE NAVIGATION TABS
@@ -3171,7 +3213,8 @@ async function loadAllData() {
 // 1. DASHBOARD CONTROLLER
 async function loadDashboard() {
   try {
-    const data = await safeFetchJson(`${API_BASE}/dashboard`);
+    const res = await fetch(`${API_BASE}/dashboard`);
+    const data = await res.json();
     state.dashboard = data;
     renderDashboard(data);
   } catch (err) {
@@ -3290,7 +3333,8 @@ async function loadIndicadores() {
     if (state.filters.obligatorio !== '') query.append('obligatorio', state.filters.obligatorio);
     if (state.filters.semaforo) query.append('semaforo', state.filters.semaforo);
 
-    const data = await safeFetchJson(`${API_BASE}/indicadores?${query.toString()}`);
+    const res = await fetch(`${API_BASE}/indicadores?${query.toString()}`);
+    const data = await res.json();
     state.indicadores = data;
     renderIndicadores(data);
     renderObligatoriosDashboard(data);
@@ -3510,7 +3554,8 @@ function updateModalAutoCalc(avanceVal) {
 // 3.5 ENCARGADOS POR EJE CONTROLLER
 async function loadEncargados() {
   try {
-    const data = await safeFetchJson(`${API_BASE}/encargados`);
+    const res = await fetch(`${API_BASE}/encargados`);
+    const data = await res.json();
     state.encargados = data;
     renderEncargados(data);
   } catch (err) {
@@ -3589,7 +3634,8 @@ function renderEncargados(items) {
 // 4. CORTES CONTROLLER
 async function loadCortes() {
   try {
-    const data = await safeFetchJson(`${API_BASE}/cortes`);
+    const res = await fetch(`${API_BASE}/cortes`);
+    const data = await res.json();
     state.cortes = data;
     renderCortes(data);
   } catch (err) {
@@ -3634,7 +3680,8 @@ function renderCortes(items) {
 // 5. GESTIÓN DE RIESGOS ISO 9001 CONTROLLER
 async function loadRiesgos() {
   try {
-    const data = await safeFetchJson(`${API_BASE}/riesgos`);
+    const res = await fetch(`${API_BASE}/riesgos`);
+    const data = await res.json();
     state.riesgos = data;
     renderRiesgos(data);
   } catch (err) {
@@ -3677,7 +3724,8 @@ function renderRiesgos(items) {
 // 6. CICLO PHVA Y MEJORA CONTINUA CONTROLLER
 async function loadHallazgos() {
   try {
-    const data = await safeFetchJson(`${API_BASE}/hallazgos`);
+    const res = await fetch(`${API_BASE}/hallazgos`);
+    const data = await res.json();
     state.hallazgos = data;
     renderHallazgos(data);
   } catch (err) {
@@ -3720,7 +3768,8 @@ function renderHallazgos(items) {
 // 7. AUDITORÍAS CLÍNICAS CONTROLLER
 async function loadAuditorias() {
   try {
-    const data = await safeFetchJson(`${API_BASE}/auditorias`);
+    const res = await fetch(`${API_BASE}/auditorias`);
+    const data = await res.json();
     state.auditorias = data;
     renderAuditorias(data);
   } catch (err) {
@@ -3952,7 +4001,7 @@ function initFormSubmits() {
     };
 
     try {
-      const res = await safeFetchJson(`${API_BASE}/indicadores/${indId}`, {
+      const res = await fetch(`${API_BASE}/indicadores/${indId}`, {
         method: 'PUT',
         headers: getAuthHeaders(),
         body: json_stringify(body)
@@ -3986,7 +4035,7 @@ function initFormSubmits() {
     };
 
     try {
-      const res = await safeFetchJson(`${API_BASE}/cortes`, {
+      const res = await fetch(`${API_BASE}/cortes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: json_stringify(body)
@@ -4021,7 +4070,7 @@ function initFormSubmits() {
     };
 
     try {
-      const res = await safeFetchJson(`${API_BASE}/riesgos`, {
+      const res = await fetch(`${API_BASE}/riesgos`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: json_stringify(body)
@@ -4056,7 +4105,7 @@ function initFormSubmits() {
     };
 
     try {
-      const res = await safeFetchJson(`${API_BASE}/hallazgos`, {
+      const res = await fetch(`${API_BASE}/hallazgos`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: json_stringify(body)
@@ -4088,7 +4137,7 @@ function initFormSubmits() {
     };
 
     try {
-      const res = await safeFetchJson(`${API_BASE}/auditorias`, {
+      const res = await fetch(`${API_BASE}/auditorias`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: json_stringify(body)
@@ -4171,22 +4220,34 @@ async function initAuth() {
   renderAuthUI();
 }
 
-// 2. RENDERIZACIÓN DE BARRA DE USUARIO
+// 2. RENDERIZACIÓN DE BARRA DE USUARIO Y GATEKEEPER DE SEGURIDAD
 function renderAuthUI() {
-  // CONTROL DE ACCESO ESTRICTO: SOLO ROL PROGRAMADOR & SUPER ADMIN ACCEDE A GOOGLE SHEETS
+  const isLoggedIn = Boolean(state.currentUser);
+  const isSuperAdmin = isLoggedIn && state.currentUser.rol === 'super_admin';
+
+  // BOTONES GOOGLE SHEETS: EXCLUSIVOS PARA ROL PROGRAMADOR & SUPER ADMIN
   const btnSyncSheets = document.getElementById('btn-sync-sheets');
   const btnOpenSheets = document.getElementById('btn-open-sheets');
-  const isSuperAdmin = state.currentUser && state.currentUser.rol === 'super_admin';
-
   if (btnSyncSheets) btnSyncSheets.style.display = isSuperAdmin ? 'inline-flex' : 'none';
   if (btnOpenSheets) btnOpenSheets.style.display = isSuperAdmin ? 'inline-flex' : 'none';
 
+  // BOTONES CSV Y PDF: EXCLUSIVOS TRAS INICIAR SESIÓN
+  const btnExportCsv = document.getElementById('btn-export-csv');
+  const btnExportPdf = document.getElementById('btn-export-pdf');
+  if (btnExportCsv) btnExportCsv.style.display = isLoggedIn ? 'inline-flex' : 'none';
+  if (btnExportPdf) btnExportPdf.style.display = isLoggedIn ? 'inline-flex' : 'none';
+
+  // CONTROL GATEKEEPER DE SEGURIDAD: OCULTA TODA LA MATRIZ Y DATOS HASTA LOGEARSE
+  const loginGate = document.getElementById('app-login-gate');
+  const authContent = document.getElementById('app-authenticated-content');
+  if (loginGate) loginGate.style.display = isLoggedIn ? 'none' : 'flex';
+  if (authContent) authContent.style.display = isLoggedIn ? 'block' : 'none';
 
   const guestView = document.getElementById('auth-guest-view');
   const loggedView = document.getElementById('auth-logged-view');
   const usersTabNav = document.getElementById('tab-nav-usuarios');
 
-  if (state.currentUser) {
+  if (isLoggedIn) {
     if (guestView) guestView.style.display = 'none';
     if (loggedView) loggedView.style.display = 'flex';
 
@@ -4243,8 +4304,11 @@ function setupAuthEventListeners() {
         await fetch(`${API_BASE}/auth/logout`, { method: 'POST', headers: getAuthHeaders() });
       } catch (e) {}
       localStorage.removeItem('mais_auth_token');
+      localStorage.removeItem('mais_gas_user');
       state.authToken = null;
       state.currentUser = null;
+      state.indicadores = [];
+      state.dashboard = null;
       renderAuthUI();
       showToast('Sesión cerrada correctamente.', 'info');
     });
@@ -4275,7 +4339,65 @@ function setupAuthEventListeners() {
     });
   }
 
-  // Submit Login
+  // Handler de Login en Pantalla de Acceso Obligatorio (Gatekeeper)
+  const formGateLogin = document.getElementById('form-gate-login');
+  if (formGateLogin) {
+    formGateLogin.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('gate-email').value.trim();
+      const password = document.getElementById('gate-password').value;
+      const alertEl = document.getElementById('gate-error-alert');
+      const btnSubmit = document.getElementById('btn-submit-gate');
+
+      if (alertEl) alertEl.style.display = 'none';
+      if (btnSubmit) {
+        btnSubmit.disabled = true;
+        btnSubmit.innerHTML = '<span>Verificando credenciales...</span>';
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+        if (res.ok && data.token) {
+          state.authToken = data.token;
+          state.currentUser = data.user;
+          localStorage.setItem('mais_auth_token', data.token);
+          renderAuthUI();
+          loadAllData();
+          showToast(`¡Bienvenido(a), ${data.user.nombre_completo}!`, 'success');
+
+          if (data.user.requiere_cambio_clave) {
+            setTimeout(() => {
+              openModal('modal-change-password');
+              const notice = document.getElementById('pw-change-notice');
+              if (notice) notice.style.display = 'block';
+            }, 400);
+          }
+        } else {
+          if (alertEl) {
+            alertEl.textContent = data.error || 'Credenciales inválidas. Revisa correo y contraseña.';
+            alertEl.style.display = 'block';
+          }
+        }
+      } catch (err) {
+        if (alertEl) {
+          alertEl.textContent = 'Error de conexión con el servicio de autenticación.';
+          alertEl.style.display = 'block';
+        }
+      } finally {
+        if (btnSubmit) {
+          btnSubmit.disabled = false;
+          btnSubmit.innerHTML = '<span>Iniciar Sesión en el Sistema</span>';
+        }
+      }
+    });
+  }
+
+  // Submit Login Modal
   const formLogin = document.getElementById('form-login');
   if (formLogin) {
     formLogin.addEventListener('submit', async (e) => {
@@ -4305,6 +4427,7 @@ function setupAuthEventListeners() {
           closeModal('modal-login');
           formLogin.reset();
           renderAuthUI();
+          loadAllData();
           showToast(`¡Bienvenido(a), ${data.user.nombre_completo}!`, 'success');
 
           if (data.user.requiere_cambio_clave) {
