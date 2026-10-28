@@ -52,3 +52,7 @@ __pycache__/
 *$py.class
 *.log
 .DS_Store
+
+# Pruebas automatizadas (Playwright / Puppeteer)
+test_*.js
+test_screenshots/
