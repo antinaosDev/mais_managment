@@ -3045,6 +3045,8 @@ if (window.location.protocol === 'file:' || !window.location.host.includes('loca
         localStorage.removeItem('mais_gas_user');
         localStorage.removeItem('mais_auth_token');
         return { ok: true, status: 200, json: async () => ({ status: 'success' }) };
+      } else if (cleanUrl.startsWith('sync')) {
+        return { ok: true, status: 200, json: async () => ({ status: 'success', message: 'Sincronización completada' }) };
       } else if (cleanUrl.startsWith('cortes')) {
         payload = { action: 'create_corte', ...body };
       } else if (cleanUrl.startsWith('riesgos')) {
@@ -3893,24 +3895,21 @@ function initEventListeners() {
   // Sync with Google Sheets
   const syncBtn = document.getElementById('btn-sync-sheets');
   const syncBtnText = document.getElementById('sync-btn-text');
-  syncBtn.addEventListener('click', async () => {
-    try {
-      syncBtnText.textContent = 'Sincronizando...';
-      syncBtn.disabled = true;
-      const res = await fetch(`${API_BASE}/sync/push`, { method: 'POST' });
-      const json = await res.json();
-      if (json.status === 'success') {
-        showToast('¡Planilla Google Sheets sincronizada exitosamente!', 'success');
-      } else {
-        showToast(`Error al sincronizar: ${json.message}`, 'error');
+  if (syncBtn) {
+    syncBtn.addEventListener('click', async () => {
+      try {
+        if (syncBtnText) syncBtnText.textContent = 'Sincronizando...';
+        syncBtn.disabled = true;
+        await loadAllData();
+        showToast('¡Tablero sincronizado exitosamente con Google Sheets!', 'success');
+      } catch (err) {
+        showToast('Error al sincronizar con Google Sheets', 'error');
+      } finally {
+        if (syncBtnText) syncBtnText.textContent = 'Sincronizar Google Sheets';
+        syncBtn.disabled = false;
       }
-    } catch (err) {
-      showToast('Error de red al sincronizar con Google Sheets', 'error');
-    } finally {
-      syncBtnText.textContent = 'Sincronizar Google Sheets';
-      syncBtn.disabled = false;
-    }
-  });
+    });
+  }
 
   // Export CSV
   document.getElementById('btn-export-csv').addEventListener('click', () => {
