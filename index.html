@@ -3320,23 +3320,29 @@ function renderDashboard(data) {
   document.getElementById('kpi-ob-bar').style.width = `${resumen.obligatorios_cumplimiento}%`;
 
   // Riesgos ISO
-  const totRiesgos = Object.values(riesgos_iso).reduce((a, b) => a + b, 0);
-  document.getElementById('kpi-riesgos-val').textContent = `${totRiesgos} Registrados`;
+  const rIso = data.riesgos_iso || riesgos_iso || {};
+  const totRiesgos = Object.values(rIso).reduce((a, b) => a + b, 0);
+  const elRiesgos = document.getElementById('kpi-riesgos-val');
+  if (elRiesgos) elRiesgos.textContent = `${totRiesgos} Registrados`;
   const rBreakdown = document.getElementById('kpi-riesgos-breakdown');
-  rBreakdown.innerHTML = `
-    <span class="r-dot critico" title="Riesgos Críticos">${riesgos_iso['Crítico'] || 0} Críticos</span>
-    <span class="r-dot alto" title="Riesgos Altos">${riesgos_iso['Alto'] || 0} Altos</span>
-    <span class="r-dot medio" title="Riesgos Medios">${riesgos_iso['Medio'] || 0} Medios</span>
-  `;
+  if (rBreakdown) {
+    rBreakdown.innerHTML = `
+      <span class="r-dot critico" title="Riesgos Críticos">${rIso['Crítico'] || 0} Críticos</span>
+      <span class="r-dot alto" title="Riesgos Altos">${rIso['Alto'] || 0} Altos</span>
+      <span class="r-dot medio" title="Riesgos Medios">${rIso['Medio'] || 0} Medios</span>
+    `;
+  }
 
   // Mejora continua PHVA
-  const totMejora = Object.values(data.hallazgos_mejora).reduce((a, b) => a + b, 0);
-  document.getElementById('kpi-mejora-val').textContent = `${totMejora} Planes`;
+  const hMejora = data.hallazgos_mejora || {};
+  const totMejora = Object.values(hMejora).reduce((a, b) => a + b, 0);
+  const elMejora = document.getElementById('kpi-mejora-val');
+  if (elMejora) elMejora.textContent = `${totMejora} Planes`;
 
   // LISTAS PRINCIPIOS
   const prinContainer = document.getElementById('principios-container');
-  prinContainer.innerHTML = '';
-  for (const [pName, pData] of Object.entries(principios)) {
+  if (prinContainer) prinContainer.innerHTML = '';
+  for (const [pName, pData] of Object.entries(principios || {})) {
     const pEl = document.createElement('div');
     pEl.className = 'prin-item';
     pEl.innerHTML = `
