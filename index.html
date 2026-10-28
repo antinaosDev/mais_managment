@@ -3241,6 +3241,13 @@ async function loadAllData() {
     if (res.ok) {
       const bundle = await res.json();
       if (bundle && bundle.indicadores && bundle.dashboard) {
+        if (Array.isArray(bundle.indicadores)) {
+          bundle.indicadores.forEach(ind => {
+            if (ind.avance > 0 && ind.avance <= 1.0) {
+              ind.avance = Math.round(ind.avance * 100 * 10) / 10;
+            }
+          });
+        }
         state.dashboard = bundle.dashboard;
         state.indicadores = bundle.indicadores;
         state.encargados = bundle.encargados || [];
@@ -3408,6 +3415,13 @@ async function loadIndicadores() {
 
     const res = await fetch(`${API_BASE}/indicadores?${query.toString()}`);
     const data = await res.json();
+    if (Array.isArray(data)) {
+      data.forEach(ind => {
+        if (ind.avance > 0 && ind.avance <= 1.0) {
+          ind.avance = Math.round(ind.avance * 100 * 10) / 10;
+        }
+      });
+    }
     state.indicadores = data;
     renderIndicadores(data);
     renderObligatoriosDashboard(data);
