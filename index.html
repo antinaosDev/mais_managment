@@ -3034,7 +3034,27 @@ if (window.location.protocol === 'file:' || !window.location.host.includes('loca
       }
     }
 
-    if (method === 'POST' || method === 'PUT') {
+    if (method === 'DELETE') {
+      const parts = cleanUrl.split('/');
+      const endpoint = parts[0];
+      const id = parts[1] || (body && body.id);
+      const payload = {
+        action: 'delete_record',
+        endpoint: endpoint,
+        id: id
+      };
+      try {
+        const res = await _realFetch(cloudUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        return { ok: true, status: 200, json: async () => data };
+      } catch (err) {
+        return { ok: false, status: 500, json: async () => ({ status: 'error', error: String(err) }) };
+      }
+    } else if (method === 'POST' || method === 'PUT') {
       let payload = { ...body };
       if (cleanUrl.startsWith('auth/login')) {
         payload = { action: 'login', email: body.email, password: body.password };
@@ -3883,16 +3903,14 @@ async function deleteRecord(endpoint, id) {
   try {
     const res = await fetch(`${API_BASE}/${endpoint}/${id}`, { method: 'DELETE' });
     if (res.ok) {
-      showToast(`Registro ${id} eliminado correctamente`, 'info');
-      if (endpoint === 'cortes') loadCortes();
-      else if (endpoint === 'riesgos') { loadRiesgos(); loadDashboard(); }
-      else if (endpoint === 'hallazgos') { loadHallazgos(); loadDashboard(); }
-      else if (endpoint === 'auditorias') { loadAuditorias(); loadDashboard(); }
+      showToast(`Registro ${id} eliminado correctamente. Actualizando...`, 'info');
+      await loadAllData();
+      showToast('Registro eliminado de Google Sheets y tablero actualizado', 'success');
     } else {
       showToast('Error al eliminar registro', 'error');
     }
   } catch (err) {
-    showToast('Error de conexión', 'error');
+    showToast('Error de conexión al eliminar registro', 'error');
   }
 }
 
