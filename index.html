@@ -4281,12 +4281,7 @@ async function initAuth() {
       if (res.ok) {
         const data = await res.json();
         state.currentUser = data.user;
-        renderAuthUI();
-        if (state.currentUser.requiere_cambio_clave) {
-          openModal('modal-change-password');
-          const notice = document.getElementById('pw-change-notice');
-          if (notice) notice.style.display = 'block';
-        }
+        // Sesión validada correctamente
         return;
       } else {
         localStorage.removeItem('mais_auth_token');
@@ -4305,11 +4300,11 @@ function renderAuthUI() {
   const isLoggedIn = Boolean(state.currentUser);
   const isSuperAdmin = isLoggedIn && state.currentUser.rol === 'super_admin';
 
-  // BOTONES GOOGLE SHEETS: EXCLUSIVOS PARA ROL PROGRAMADOR & SUPER ADMIN
+  // BOTONES GOOGLE SHEETS: ACCESIBLES PARA TODOS LOS USUARIOS AUTENTICADOS
   const btnSyncSheets = document.getElementById('btn-sync-sheets');
   const btnOpenSheets = document.getElementById('btn-open-sheets');
-  if (btnSyncSheets) btnSyncSheets.style.display = isSuperAdmin ? 'inline-flex' : 'none';
-  if (btnOpenSheets) btnOpenSheets.style.display = isSuperAdmin ? 'inline-flex' : 'none';
+  if (btnSyncSheets) btnSyncSheets.style.display = isLoggedIn ? 'inline-flex' : 'none';
+  if (btnOpenSheets) btnOpenSheets.style.display = isLoggedIn ? 'inline-flex' : 'none';
 
   // BOTONES CSV Y PDF: EXCLUSIVOS TRAS INICIAR SESIÓN
   const btnExportCsv = document.getElementById('btn-export-csv');
@@ -4452,14 +4447,6 @@ function setupAuthEventListeners() {
           await loadAllData();
           renderAuthUI();
           showToast(`¡Bienvenido(a), ${data.user.nombre_completo}!`, 'success');
-
-          if (data.user.requiere_cambio_clave) {
-            setTimeout(() => {
-              openModal('modal-change-password');
-              const notice = document.getElementById('pw-change-notice');
-              if (notice) notice.style.display = 'block';
-            }, 400);
-          }
         } else {
           if (alertEl) {
             alertEl.textContent = data.error || 'Credenciales inválidas. Revisa correo y contraseña.';
@@ -4647,38 +4634,23 @@ function checkIndicadorPermissions(ind) {
       notice.style.border = '1px solid #cbd5e1';
       notice.style.color = '#334155';
     }
-  } else if (state.currentUser.rol === 'super_admin') {
+  } else {
+    // Todos los usuarios autenticados (Super Admin, Directores, Encargados de Eje, Referentes MAIS)
     canEdit = true;
-    permMsg = '👑 <strong>Permiso Total Autorizado:</strong> Programador & Super Administrador. Tienes control pleno sobre los 38 indicadores y respaldos normativos.';
+    const isSuper = state.currentUser.rol === 'super_admin';
+    const cargoDisplay = state.currentUser.cargo || (isSuper ? 'Programador & Super Admin' : 'Referente / Encargado(a) MAIS');
+    const nombreDisplay = state.currentUser.nombre_completo || state.currentUser.email;
+
+    if (isSuper) {
+      permMsg = `👑 <strong>Permiso Total:</strong> Programador & Super Administrador (${escapeHtml(nombreDisplay)}). Tienes control pleno sobre los 38 indicadores y respaldos normativos.`;
+    } else {
+      permMsg = `✅ <strong>Edición Habilitada:</strong> Sesión activa como <strong>${escapeHtml(cargoDisplay)}</strong> (${escapeHtml(nombreDisplay)}). Puedes registrar el % de avance real, justificar brechas en observaciones, asignar semáforos y adjuntar carpetas Drive de verificación.`;
+    }
+
     if (notice) {
       notice.style.background = '#f0fdf4';
       notice.style.border = '1px solid #86efac';
       notice.style.color = '#15803d';
-    }
-  } else {
-    // Encargado de Eje: verificación rigurosa de pertenencia por palabras clave
-    const userText = ((state.currentUser.eje_responsable || '') + ' ' + (state.currentUser.cargo || '')).toLowerCase();
-    const indText = ((ind.responsable || '') + ' ' + (ind.nombre_corto || '')).toLowerCase();
-
-    const keywords = ['direccion', 'gestor', 'calidad', 'ecicep', 'participacion', 'intercultural', 'some', 'agenda', 'promocion', 'sector', 'rrhh', 'capacitacion', 'estadistica', 'prevencion', 'urgencia', 'psicosocial', 'salud mental'];
-    const matched = keywords.some(k => userText.includes(k) && indText.includes(k));
-
-    if (matched) {
-      canEdit = true;
-      permMsg = `✅ <strong>Eje Asignado:</strong> Editando activamente como <strong>${escapeHtml(state.currentUser.cargo)}</strong> (${escapeHtml(state.currentUser.nombre_completo)}).`;
-      if (notice) {
-        notice.style.background = '#f0fdf4';
-        notice.style.border = '1px solid #86efac';
-        notice.style.color = '#15803d';
-      }
-    } else {
-      canEdit = false;
-      permMsg = `ℹ️ <strong>Solo Lectura (Eje no asignado):</strong> Tu perfil está asignado al eje <em>"${escapeHtml(state.currentUser.eje_responsable)}"</em>. Este indicador corresponde al responsable <em>"${escapeHtml(ind.responsable)}"</em>.`;
-      if (notice) {
-        notice.style.background = '#fefce8';
-        notice.style.border = '1px solid #fde047';
-        notice.style.color = '#854d0e';
-      }
     }
   }
 
